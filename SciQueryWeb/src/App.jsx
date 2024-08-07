@@ -1,36 +1,67 @@
 import "./App.css";
 //pages
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-  Route,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
-import Contact from "./pages/Contact/Contact";
+import RootLayout from "./layout/RootLayout";
+import QuestionPage from "./pages/QuestionPage/QuestionPage";
+import ContactLayout from "./layout/ContactLayout";
+import Faq from "./pages/help/Faq";
+import Form from "./pages/help/Form";
+import QuestionsList from "./components/Questions/QuestionsList/QuestionsList";
+import QuestionDetail from "./components/Questions/QuestionDetail/QuestionDetail";
+import ErrorPage from "./pages/help/ErrorPage";
 
 function App() {
-  const routes = createBrowserRouter(
-    createRoutesFromElements(
-      <Route>
-      <Route path="/" element={<Home />} />
-      <Route path="/About" element={<About />} />
-      <Route path="/Contact" element={<Contact />} />
-    </Route>
-    )
-  )
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      errorElement : <ErrorPage/>,
+      element: <RootLayout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/questions",
+          element: <QuestionPage />,
+          children: [
+            {
+              index: true,
+              element: <QuestionsList />,
+            },
+            {
+              path: ":id",
+              element: <QuestionDetail />,
+            },
+          ],
+        },
+        {
+          path: "/contact/",
+          element: <ContactLayout />,
+          children: [
+            {
+              path: "faq",
+              element: <Faq />,
+            },
+            {
+              path: "form",
+              element: <Form />,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
   return (
     <div className="App">
-  
-        {/* <nav>
-          <h1>My Nav</h1>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/About">About</NavLink>
-          <NavLink to="/Contact">Contact</NavLink>
-        </nav> */}
-      <RouterProvider router={routes}/>
+      <RouterProvider router={routes} />
     </div>
   );
 }

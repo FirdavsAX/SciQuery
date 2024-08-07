@@ -1,28 +1,76 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+body{
+  background-color: whitesmoke;
+}
 .App {
-  max-width: 960px;
+  max-width: 1090px;
   margin: 0 auto;
+  background: whitesmoke;
+  margin-left: 250px;
+}
+/* Form css */
+
+.form-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 
-nav {
-  display: flex;
-  margin: 0 auto 60px;
-  gap: 10px;
-  align-items: center;
+.form-control {
+  display: block;
+  margin-bottom: 1rem;
 }
 
-nav h1 {
-  margin-right: auto;
+.form-control span {
+  display: block;
+  margin-bottom: 10px;
 }
 
-nav a {
-  color: #333;
-  padding: 4px 10px;
+.form-control input, textarea {
+  padding: 5px 8px;
+  font-family: inherit;
+  width: 100%;
+  resize: none;
+  font-size: 20px;
 }
-nav a.active {
-  color : white;
-  background: #333;
+
+.button {
+  background:#848484;
+  border: 0;
+  padding: 8px 15px;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.button:hover {
+  background:#848484d2;
+}
+
+/* PAGE NOT FOUND */
+
+.error-container {
+  text-align: center;
+}
+
+.error-container p {
+  text-align: justify;
+}
+
+.error-container a {
   text-decoration: none;
+  color:#333;
+  padding: 5px 8px;
+  border: 2px solid #333;
+  background-color:#fff;
+
+}
+
+.error-container a:hover {
+  background: #333;
+  color:#fff;
 }
