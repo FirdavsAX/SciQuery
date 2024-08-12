@@ -23,9 +23,10 @@ nav a.active {
 
 .navbar {
   width: 100%;
-  background-color: gray;
   display: flex;
   justify-content: center;
+  margin: 0;
+  
   align-items: center;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

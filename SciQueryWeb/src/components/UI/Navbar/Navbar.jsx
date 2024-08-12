@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <>
       <header>
-        <nav>
+        <nav className="navbar">
           <div></div>
           <div>
             <div className="search">

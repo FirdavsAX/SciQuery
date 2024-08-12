@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { useRouteError } from "react-router-dom";
-
+import { toast } from "react-toastify";
 function ErrorPage() {
   const error = useRouteError();
-console.log(error);
+  console.log(error);
   if (error.status === 404) {
     return (
       <div className="error-container">
@@ -19,6 +19,13 @@ console.log(error);
         <NavLink to="/">Home Page</NavLink>
       </div>
     );
+  } else if (error.status === 401) {
+    <div className="error-container">
+      <h1>Unauthorized</h1>
+      {toast.warning(error.message)};
+      {window.history.pushState({}, "LoginPage", "/login")}
+      <NavLink to="/">Home Page</NavLink>
+    </div>;
   } else {
     return (
       <div className="error-container">

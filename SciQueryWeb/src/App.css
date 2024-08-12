@@ -1,17 +1,21 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-body{
-  background-color: whitesmoke;
+
+/* Ensure that body styles are applied correctly */
+body {
+  background-color: whitesmoke !important;
 }
+
 .App {
-  max-width: 1090px;
   margin: 0 auto;
+  margin-top: 1px;
   background: whitesmoke;
   margin-left: 250px;
+  margin-right:100px;
 }
-/* Form css */
 
+/* Form styles */
 .form-container {
   width: 100%;
   max-width: 300px;
@@ -29,7 +33,8 @@ body{
   margin-bottom: 10px;
 }
 
-.form-control input, textarea {
+.form-control input,
+textarea {
   padding: 5px 8px;
   font-family: inherit;
   width: 100%;
@@ -38,7 +43,7 @@ body{
 }
 
 .button {
-  background:#848484;
+  background: #848484;
   border: 0;
   padding: 8px 15px;
   color: #fff;
@@ -48,11 +53,10 @@ body{
 }
 
 .button:hover {
-  background:#848484d2;
+  background: #848484d2;
 }
 
 /* PAGE NOT FOUND */
-
 .error-container {
   text-align: center;
 }
@@ -63,14 +67,60 @@ body{
 
 .error-container a {
   text-decoration: none;
-  color:#333;
+  color: #333;
   padding: 5px 8px;
   border: 2px solid #333;
-  background-color:#fff;
-
+  background-color: #fff;
 }
 
 .error-container a:hover {
   background: #333;
-  color:#fff;
+  color: #fff;
+}
+/* CSS */
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #9ca595;
+  border: 1px solid transparent;
+  border-radius: .15rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 1;
+  height: 55px;
+  margin: 0;
+  margin-top: 4px;
+  min-height: 1rem;
+  padding: calc(.775rem - 1px) calc(1.5rem - 0.5px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #90c89f;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+  transform: translateY(-1px);
+}
+
+.button-5:active {
+  background-color: #50de4b;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
 }

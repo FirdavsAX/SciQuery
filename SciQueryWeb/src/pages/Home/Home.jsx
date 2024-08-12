@@ -1,14 +1,16 @@
 import React from 'react'
-import TagCreate from '../../components/Tags/TagCreate'
-import CreateAndUpdateQuestionPage from '../QuestionPage/CreateAndUpdateQuestionPage'
-
+import { NavLink, Outlet } from 'react-router-dom'
+import QuestionsList from '../../components/Questions/QuestionsList/QuestionsList'
+import './Home.css'
 export default function Home() 
 {
   return (
     <div>
-        <h1>Home</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, tenetur placeat! Sit impedit aliquid quas. Possimus tenetur excepturi iure, odit placeat, et sit eum repellendus, perferendis commodi libero porro impedit!</p>
-        <CreateAndUpdateQuestionPage/>
+      <div className="d-flex justify-content-between Align-items-center">
+        <h1>Top Questions</h1>
+        <NavLink className="button-5" role="button" to='/new'>Ask question</NavLink>
+      </div>
+        <QuestionsList/> 
     </div>
 
   )

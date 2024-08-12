@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import { API_BASE_URL } from "../../../config/Constants";
 function QuestionDetail() {
   const id = useParams();
-  const url = "https://localhost:7008/api/questions/" + id.id;
+  const url = API_BASE_URL + 'questions/' + id.id;
   const { data: fullQuestion, isPending, error } = useFetch(url);
 
   return (

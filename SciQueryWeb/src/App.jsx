@@ -12,9 +12,16 @@ import Form from "./pages/help/Form";
 import QuestionsList from "./components/Questions/QuestionsList/QuestionsList";
 import QuestionDetail from "./components/Questions/QuestionDetail/QuestionDetail";
 import ErrorPage from "./pages/help/ErrorPage";
+import CreateAndUpdateQuestionPage from "./pages/QuestionPage/Create/CreateAndUpdateQuestionPage";
+import { lazy, useState } from "react";
+import Login from "./pages/Auth/Login";
+
+
 
 function App() {
+  const [token,setToken] = useState(window.localStorage.getItem('token'));
   const routes = createBrowserRouter([
+    token ? 
     {
       path: "/",
       errorElement : <ErrorPage/>,
@@ -22,7 +29,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: <Home />
         },
         {
           path: "/about",
@@ -43,6 +50,10 @@ function App() {
           ],
         },
         {
+          path : "new",
+          element : <CreateAndUpdateQuestionPage/>
+        },
+        {
           path: "/contact/",
           element: <ContactLayout />,
           children: [
@@ -57,7 +68,13 @@ function App() {
           ],
         },
       ],
-    },
+    }
+    :
+    {
+      element : <Login setToken={setToken}/>,
+      action : () => <Login setToken={setToken}/>,
+      path : '/'
+    }
   ]);
   return (
     <div className="App">
