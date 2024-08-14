@@ -82,9 +82,7 @@ const Register = ({ setToken }) => {
                 <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
-                <a type="button" href="/register" className="btn btn-primary">
-                  Register
-                </a>
+                
               </form>
             </div>
           </div>
