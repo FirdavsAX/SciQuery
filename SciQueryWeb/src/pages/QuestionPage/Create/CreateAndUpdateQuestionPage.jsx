@@ -1,11 +1,12 @@
-import React from 'react';
-import TitleInput from '../../../components/bodyEditor/Title';
-import BodyEditor from '../../../components/bodyEditor/BodyEditor';
-import TagsInput from '../../../components/bodyEditor/TagsInput';
-import useQuestionForm from '../../../components/hooks/useQuestionForm';
-import { useCreate } from '../../../components/hooks/useCreate';
-import { API_BASE_URL } from '../../../config/Constants';
-import Spinner from '../../../components/Spinner/Spinner';
+import React from "react";
+import TitleInput from "../../../components/bodyEditor/Title";
+import BodyEditor from "../../../components/bodyEditor/BodyEditor";
+import TagsInput from "../../../components/bodyEditor/TagsInput";
+import useQuestionForm from "../../../components/hooks/useQuestionForm";
+import { useCreate } from "../../../components/hooks/useCreate";
+import { API_BASE_URL } from "../../../config/Constants";
+import Spinner from "../../../components/Spinner/Spinner";
+import {  useNavigate } from "react-router-dom";
 
 function CreateAndUpdateQuestionPage() {
   const {
@@ -22,12 +23,12 @@ function CreateAndUpdateQuestionPage() {
     handleGetTags,
   } = useQuestionForm();
 
-  const { create, loading } = useCreate(API_BASE_URL + 'questions/');
-
+  const { create, loading } = useCreate(API_BASE_URL + "questions/");
+  const navigate = useNavigate();
   const createQuestion = async () => {
     const question = { title, body, tags };
 
-      await create(question);
+    await create(question).then(() => {navigate("/")});
   };
 
   return (
@@ -48,7 +49,7 @@ function CreateAndUpdateQuestionPage() {
         createQuestion={createQuestion}
         handleGetTags={handleGetTags}
       />
-      <> {loading && <Spinner/> }</>
+      <> {loading && <Spinner />}</>
     </>
   );
 }

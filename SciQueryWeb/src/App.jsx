@@ -7,7 +7,6 @@ import About from "./pages/About/About";
 import RootLayout from "./layout/RootLayout";
 import QuestionPage from "./pages/QuestionPage/QuestionPage";
 import ContactLayout from "./layout/ContactLayout";
-import AuthLayout from "./layout/AuthLayout";
 import Faq from "./pages/help/Faq";
 import Form from "./pages/help/Form";
 import QuestionsList from "./components/Questions/QuestionsList/QuestionsList";
@@ -17,7 +16,6 @@ import CreateAndUpdateQuestionPage from "./pages/QuestionPage/Create/CreateAndUp
 import { useState } from "react";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -71,22 +69,14 @@ function App() {
           ],
         }
       : {
-          element: <AuthLayout setToken={setToken} />,
-          action: () => <AuthLayout setToken={setToken} />,
+          element: <Login setToken={setToken} />,
+          action: () => <Login setToken={setToken} />,
           path: "/",
-          children: [
-            {
-              index:true,
-              element: <Register setToken={setToken} />,
-              action: () => <Register setToken={setToken} />,
-              path: "register",
-            },
-            {
-              element: <Login setToken={setToken} />,
-              action: () => <Login setToken={setToken} />,
-              path: "/",
-            },
-          ],
+        },
+        {
+          action: () => <Login setToken={setToken} />,
+          element: <Register setToken={setToken} />,
+          path: "/register",
         },
   ]);
   return (

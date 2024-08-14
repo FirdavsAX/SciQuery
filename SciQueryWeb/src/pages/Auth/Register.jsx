@@ -1,14 +1,19 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import http from "../../services/index";
+
 const Register = ({ setToken }) => {
   const registerInput = useRef(null);
   const passwordInput = useRef(null);
+  const emailInput = useRef(null);
   const [hasError, setHasError] = useState(false);
+  const navigate = useNavigate(); // Hook for navigation
 
   const onRegister = (e) => {
     e.preventDefault();
     http
       .post("account/register", {
+        email: emailInput.current.value,
         userName: registerInput.current.value,
         password: passwordInput.current.value,
       })
@@ -16,6 +21,7 @@ const Register = ({ setToken }) => {
         alert("Success");
         window.localStorage.setItem("token", res.data);
         setToken(res.data);
+        navigate("/"); // Navigate to home page
       })
       .catch((error) => {
         setHasError(true);
@@ -42,26 +48,27 @@ const Register = ({ setToken }) => {
                 <></>
               )}
               <form onSubmit={(e) => onRegister(e)}>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input
+                <div className="form-group">
+                  <label htmlFor="exampleInputEmail1">Email address</label>
+                    <input
+                    ref={emailInput}
                     type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
+                    className="form-control"
+                    id="exampleInputEmail"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
                   />
-                  <small id="emailHelp" class="form-text text-muted">
+                  <small id="emailHelp" className="form-text text-muted">
                     We'll never share your email with anyone else.
                   </small>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">User name</label>
+                  <label htmlFor="exampleInput">User name</label>
                   <input
                     ref={registerInput}
                     type="text"
                     className="form-control"
-                    id="exampleInputEmail1"
+                    id="exampleInput"
                     placeholder="Enter user name"
                   />
                   <small id="emailHelp" className="form-text text-muted">

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TagsInput = ({ tagsInput,createQuestion, handleGetTags }) => (
+const TagsInput = ({ tagsInput,createQuestion,handleGetTags }) => (
   <div className="card mb-5">
     <div className="card-body">
       <h5 className="card-title">Tags</h5>

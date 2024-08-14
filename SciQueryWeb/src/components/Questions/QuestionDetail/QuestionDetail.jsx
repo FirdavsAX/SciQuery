@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../../../config/Constants";
+import Spinner from "../../Spinner/Spinner";
+import "./QuestionDetail.css";
+
 function QuestionDetail() {
   const id = useParams();
-  const url = API_BASE_URL + 'questions/' + id.id;
+  const url = API_BASE_URL + "questions/" + id.id;
   const { data: fullQuestion, isPending, error } = useFetch(url);
 
   return (
     <div>
-      <h1>Questions</h1>
-      {isPending && <h3>Loading...</h3>}
+      {isPending && <Spinner />}
       {error && <h3>{error}</h3>}
+
       {fullQuestion && (
         <div className="question-container">
           <h2>{fullQuestion.title || "No title available"}</h2>
-
+          <hr />
           <div className="d-flex justify-content-between align-items-center">
             {fullQuestion.image && <img src={fullQuestion.image}></img>}
             <p>{fullQuestion.body || "No body available"}</p>

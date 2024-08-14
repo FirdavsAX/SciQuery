@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import http from "../../services/index";
-const Login = ({setToken}) => {
+const Login = ({ setToken }) => {
   const loginInput = useRef(null);
   const passwordInput = useRef(null);
   const [hasError, setHasError] = useState(false);
@@ -50,9 +50,6 @@ const Login = ({setToken}) => {
                     id="exampleInputEmail1"
                     placeholder="Enter user name"
                   />
-                  <small id="emailHelp" className="form-text text-muted">
-                    We'll never share your email with anyone else.
-                  </small>
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputPassword1">Password</label>
@@ -64,13 +61,14 @@ const Login = ({setToken}) => {
                     placeholder="Password"
                   />
                 </div>
-
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-                <a type="button" href="/register" className="btn btn-primary">
-                  Register
-                </a>
+                <div className="d-flex align-items-center btn btn-group gap-2 ">
+                  <button type="submit" className="btn btn-primary">
+                    Submit
+                  </button>
+                  <a type="button" href="/register" className="btn btn-primary">
+                    Register
+                  </a>
+                </div>
               </form>
             </div>
           </div>
