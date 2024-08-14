@@ -16,8 +16,6 @@ const Login = ({setToken}) => {
         alert("Success");
         window.localStorage.setItem("token", res.data);
         setToken(res.data);
-        console.log(res.data)
-
       })
       .catch((error) => {
         setHasError(true);

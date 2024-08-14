@@ -4,16 +4,17 @@ import { NavLink } from "react-router-dom";
 import QuestionItem from "../QuestionItem/QuestionItem";
 import Spinner from "../../Spinner/Spinner";
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import { API_BASE_URL } from "../../../config/Constants";
 
 function QuestionsList() {
   const {
     data: questions,
     isPending,
     error,
-  } = useFetch("https://xmzj98xt-7008.euw.devtunnels.ms/api/Questions");
+  } = useFetch(API_BASE_URL +  "questions");
 
   const connection = new HubConnectionBuilder()
-      .withUrl('https://xmzj98xt-7008.euw.devtunnels.ms/api/notificationHub')
+      .withUrl(API_BASE_URL + 'notificationHub')
       .build();
   
   connection.on('ReceiveNotification', (message) => {
