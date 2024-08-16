@@ -14,31 +14,6 @@ function QuestionsList() {
     error,
   } = useFetch(API_BASE_URL + "questions");
 
-  // useEffect(() => {
-  //   const connection = new HubConnectionBuilder()
-  //     .withUrl(API_BASE_URL + 'notificationHub', {
-  //       accessTokenFactory: () => window.localStorage.getItem("token"),
-  //     })
-  //     .withAutomaticReconnect()
-  //     .configureLogging(LogLevel.Information) // Enable detailed logging
-  //     .build();
-  
-      
-  //     connection
-  //     .start()
-  //     .then(() => console.log("Connected to SignalR hub"))
-  //     .catch((err) => console.error("Error connecting to hub:", err));
-  //     connection.on("SendNotification", (message) => {
-  //       console.log("New Notification:", message);
-  //     });
-
-  //   return () => {
-  //     connection
-  //       .stop()
-  //       .catch((err) => console.error("Error stopping connection:", err));
-  //   };
-  // }, []); // Empty dependency array ensures this runs once on mount
- 
   return (
     <div>
 <NotificationComponent/>

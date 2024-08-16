@@ -16,9 +16,11 @@ function QuestionDetail() {
       {error && <h3>{error}</h3>}
 
       {fullQuestion && (
-        <div className="question-container">
+        <div className="question-detail">
+            
           <h2>{fullQuestion.title || "No title available"}</h2>
           <hr />
+          {fullQuestion.images}
           <div className="d-flex justify-content-between align-items-center">
             {fullQuestion.image && <img src={fullQuestion.image}></img>}
             <p>{fullQuestion.body || "No body available"}</p>

@@ -8,11 +8,10 @@ const useQuestionForm = () => {
   const [body, setBody] = useState("");
   const [tags, setTags] = useState([]);
   const [tagsInput, setTagsInput] = useState("");
-
+  const [images,setImages] = useState([]);
   const handleScroll = () => {
     titleRef.current.scrollIntoView({ behavior: "smooth" });
   };
-
   const handleGetTags = (e) => {
     setTagsInput(e);
 
@@ -24,6 +23,8 @@ const useQuestionForm = () => {
     setTitle,
     body,
     setBody,
+    images,
+    setImages,
     tags,
     tagsInput,
     setTagsInput,

@@ -1,6 +1,6 @@
-// hooks/useCreate.js
-import { useState } from 'react';
-import { postData } from '../../services/ApiService';
+import { useState } from "react";
+import { postData } from "../../services/ApiService"; // Ensure this is correctly imported
+import axios from "axios";
 
 export const useCreate = (url) => {
   const [loading, setLoading] = useState(false);
@@ -11,12 +11,37 @@ export const useCreate = (url) => {
       const result = await postData(url, data);
       setLoading(false);
       return result;
-    } 
-    catch (err) {
+    } catch (err) {
       setLoading(false);
       throw err;
     }
   };
 
-  return { create, loading };
+  const uploadImage = async (images, url) => {
+    setLoading(true);
+
+    try {
+      const uploadPromises = images.map(async (image) => {
+        const formData = new FormData();
+        formData.append("file", image);
+
+        const result = await postData(url, formData);
+        return result;
+      });
+
+      // Wait for all images to be uploaded
+      const results = await Promise.all(uploadPromises);
+      setLoading(false);
+      const imagePaths = results.map((response) => response.data);
+      
+      return imagePaths;
+
+    } catch (error) {
+      setLoading(false);
+      console.error("There was an error uploading the images!", error);
+      throw error;
+    }
+  };
+
+  return { uploadImage, create, loading };
 };

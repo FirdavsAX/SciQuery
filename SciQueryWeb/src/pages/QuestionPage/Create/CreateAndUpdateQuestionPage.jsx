@@ -6,7 +6,8 @@ import useQuestionForm from "../../../components/hooks/useQuestionForm";
 import { useCreate } from "../../../components/hooks/useCreate";
 import { API_BASE_URL } from "../../../config/Constants";
 import Spinner from "../../../components/Spinner/Spinner";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ImageInput from "../../../components/bodyEditor/ImageUploads/ImageInput";
 
 function CreateAndUpdateQuestionPage() {
   const {
@@ -14,6 +15,8 @@ function CreateAndUpdateQuestionPage() {
     setTitle,
     body,
     setBody,
+    images,
+    setImages,
     tags,
     tagsInput,
     setTagsInput,
@@ -23,12 +26,21 @@ function CreateAndUpdateQuestionPage() {
     handleGetTags,
   } = useQuestionForm();
 
-  const { create, loading } = useCreate(API_BASE_URL + "questions/");
+  const { uploadImage, create, loading } = useCreate("questions/");
   const navigate = useNavigate();
-  const createQuestion = async () => {
-    const question = { title, body, tags };
 
-    await create(question).then(() => {navigate("/")});
+  const createQuestion = async () => {
+    const question = { title, body, imagePath: [], tags };
+
+    const res = await uploadImage(images, "questions/upload-image").catch(
+      (error) => {
+        console.log("Natija : " + error);
+      }
+    );
+    question.imagePath = res;
+    await create(question).then(() => {
+      navigate("/");
+    });
   };
 
   return (
@@ -37,6 +49,7 @@ function CreateAndUpdateQuestionPage() {
       <hr />
 
       <TitleInput title={title} setTitle={setTitle} titleRef={titleRef} />
+      <ImageInput images={images} setImages={setImages} />
       <BodyEditor
         body={body}
         setBody={setBody}
