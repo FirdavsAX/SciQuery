@@ -1,37 +1,49 @@
-.image-modal{
-    display: block;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    max-width: 1000px;
-  }
-  card{
-    height: auto;
-  }
-  img{
-    border: #2d2c2c;
-    border-radius:12px;
-  }
-  input[type="file"] {
-    display: none;
-  }
-  .custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: aquamarine    ;
-    cursor: pointer;
-  }
-  
-  .image-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it appears on top of other content */
-  }
+/* ImageInput.css */
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+.image-container img {
+  display: block;
+  border-radius: 0.25rem;
+}
+
+.image-container button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+}

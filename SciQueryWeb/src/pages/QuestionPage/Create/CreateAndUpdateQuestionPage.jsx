@@ -4,7 +4,6 @@ import BodyEditor from "../../../components/bodyEditor/BodyEditor";
 import TagsInput from "../../../components/bodyEditor/TagsInput";
 import useQuestionForm from "../../../components/hooks/useQuestionForm";
 import { useCreate } from "../../../components/hooks/useCreate";
-import { API_BASE_URL } from "../../../config/Constants";
 import Spinner from "../../../components/Spinner/Spinner";
 import { useNavigate } from "react-router-dom";
 import ImageInput from "../../../components/bodyEditor/ImageUploads/ImageInput";
@@ -30,17 +29,15 @@ function CreateAndUpdateQuestionPage() {
   const navigate = useNavigate();
 
   const createQuestion = async () => {
-    const question = { title, body, imagePath: [], tags };
+    const question = { title, body, imagePaths: [], tags };
 
-    const res = await uploadImage(images, "questions/upload-image").catch(
-      (error) => {
-        console.log("Natija : " + error);
-      }
-    );
-    question.imagePath = res;
-    await create(question).then(() => {
-      navigate("/");
-    });
+    const res = await uploadImage(images, "questions/upload-image");
+    question.imagePaths = res;
+    console.log(res);
+    console.log(question.imagePaths)
+    const result = await create(question);
+
+    navigate(`/questions/${result.id}`);
   };
 
   return (

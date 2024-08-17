@@ -1,4 +1,4 @@
-.question-container {
+.question-container-item {
     margin: 0 auto;
     width: 100%;
     padding: 10px;
@@ -8,15 +8,15 @@
     background-color: #f9f9f9;
   }
   
-  .question-container h6,
-  .question-container h5 {
+  .question-container-item h6,
+  .question-container-item h5 {
     text-align:start;
     margin-left: 30px;
   }
-  .question-container a{
+  .question-container-item a{
     text-decoration: none;
   }
-  .question-container p{
+  .question-container-item p{
     font-size: small;
     text-align: end;
     margin-top: 10px;

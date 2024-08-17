@@ -1,0 +1,44 @@
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    overflow: hidden; /* Ensures rounded corners for image and button */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  }
+  
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+  }
+  
+  .image:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+  
+  .btn-delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth color transition */
+  }
+  
+  .btn-delete:hover {
+    background-color: #c82333; /* Darker red on hover */
+  }
+  

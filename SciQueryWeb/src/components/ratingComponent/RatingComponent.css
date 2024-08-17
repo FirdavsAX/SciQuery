@@ -1,0 +1,28 @@
+/* IconComponent.css */
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    position:sticky;
+    margin-bottom: 0%;
+    gap: 10px; /* Adjust spacing between icons */
+  }
+  .icon-container h2{
+    font-size: 40px;
+    margin-left: 6px;
+  }
+  .icon-button {
+    background-color: #f0f0f0; /* Background color */
+    border: none;
+    height: 70px;
+    width: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Smooth hover effect */
+  }
+  
+  .icon-button:hover {
+    background-color: #e0e0e0; /* Lighter background on hover */
+  }
+  
+  /* Customize other styles as needed */
+  

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { postData } from "../../services/ApiService"; // Ensure this is correctly imported
-import axios from "axios";
 
 export const useCreate = (url) => {
   const [loading, setLoading] = useState(false);
@@ -32,7 +31,7 @@ export const useCreate = (url) => {
       // Wait for all images to be uploaded
       const results = await Promise.all(uploadPromises);
       setLoading(false);
-      const imagePaths = results.map((response) => response.data);
+      const imagePaths = results.map((response) => response);
       
       return imagePaths;
 

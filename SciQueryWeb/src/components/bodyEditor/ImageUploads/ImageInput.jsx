@@ -1,5 +1,10 @@
+// ImageInput.js
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import "./ImageInput.css";
+import ImageModal from "../../images/ImageModal";
+import ImageComponent from "../../images/imageComponent/ImageComponent";
+import ImageContainer from "../../images/imageContainer/ImageContainer";
 
 const ImageInput = ({ images, setImages }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -7,65 +12,22 @@ const ImageInput = ({ images, setImages }) => {
   const handleImageUpload = (e) => {
     e.preventDefault();
     const newImages = Array.from(e.target.files);
-    // Check if the total number of images won't exceed 6
     if (images.length + newImages.length <= 5) {
       setImages((prevImages) => [...prevImages, ...newImages]);
     } else {
-      alert("Image limit reached!")
+      alert("Image limit reached!");
     }
   };
-  
+
   const handleDeleteImage = (index) => {
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
     setImages(updatedImages);
   };
 
-  const handleImageClick = (img) => {
-    setSelectedImage(img);
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
-
   return (
-    <div className="card my-4" style={{ height :"auto",overflowY: "auto" }}>
-      <div className="d-flex justify-content-center align-items-center gap-5">
-        {images && images.map((img, index) => (
-          <div key={index}>
-            <hr />
-            <img
-              height={100}
-              src={URL.createObjectURL(img)}
-              alt={`images-${index}`}
-              onClick={() => handleImageClick(img)}
-              style={{ cursor: "pointer" }}
-            />
-            <button
-              className="btn btn-danger"
-              onClick={() => handleDeleteImage(index)}
-            >
-              X
-            </button>
-          </div>
-        ))}
-      </div>
-      {selectedImage && (
-        <div className="image-overlay">
-          <div className="image-modal">
-            <div className="modal-content">
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                alt="selected-image"
-              />
-              <button className="btn btn-primary" onClick={closeModal}>
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+    <div className="card my-4" style={{ height: "auto", overflowY: "auto" }}>
+      <ImageContainer images={images} onDeleteImage={handleDeleteImage}/>
       <br />
       <br />
       <hr />
@@ -75,6 +37,11 @@ const ImageInput = ({ images, setImages }) => {
       </label>
     </div>
   );
+};
+
+ImageInput.propTypes = {
+  images: PropTypes.array.isRequired,
+  setImages: PropTypes.func.isRequired
 };
 
 export default ImageInput;

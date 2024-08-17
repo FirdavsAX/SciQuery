@@ -11,7 +11,7 @@ export const postData = async (url, data) => {
         // The browser will set it automatically along with the boundary
       },
     });
-    return response;
+    return response.data;
   } catch (error) {
     console.error(
       "Error in postData:",

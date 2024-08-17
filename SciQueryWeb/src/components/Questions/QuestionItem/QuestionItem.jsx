@@ -32,7 +32,7 @@ const QuestionItem = (questionObject) => {
   return (
     <>
       {question && (
-        <div className="question-container m-3 pt-6">
+        <div className="question-container-item m-3 pt-6">
           <NavLink to={`/questions/${question.id}`}>
             <h6>{question.title || "No title available"}</h6>
           </NavLink>
