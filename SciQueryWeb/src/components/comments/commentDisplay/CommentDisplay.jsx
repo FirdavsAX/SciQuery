@@ -1,10 +1,10 @@
 import React from "react";
+import "./CommentDisplay.css";
 
 const CommentDisplay = ({ comment }) => {
   return (
-    <div>
-      <hr />
-      <p>{comment}</p>
+    <div className="comment">
+      <p><em>{comment}</em></p>
     </div>
   );
 };
