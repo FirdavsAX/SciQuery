@@ -1,30 +1,31 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from 'react';
+import { getData } from '../../services/ApiService';
 
-export function useFetch(url) {
- const [data, setData] = useState(null)
- const [isPending, setIsPending] = useState(false)
- const [error, setError] = useState(null)
+export const useFetch = (url) => {
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
 
- useEffect(() => {
-    const fetchData = async () => {
-       setIsPending(true);
-       setError(null); 
-       try {
-        const req = await fetch(url)
-        if (!req.ok) {
-            throw new Error(req.statusText)
+  useEffect(() => {
+    if (url) { // Only fetch if URL is valid
+      const fetchData = async () => {
+        try {
+          const result = await getData(url);
+          setData(result);
+          setError(null);
+        } catch (err) {
+          setError(err.message || 'An error occurred');
+          setData(null);
+        } finally {
+          setIsPending(false);
         }
-        const data = await req.json()
-        setData(data)
-        setIsPending(false)
-       }
-      catch (err) {
-        setError(err.message)
-        setIsPending(false)
-      }
-    }
-    fetchData()
- }, [url])
+      };
 
- return { data,isPending, error }
-}
+      fetchData();
+    } else {
+      setIsPending(false); // If no URL, stop pending state
+    }
+  }, [url]);
+
+  return { data, isPending, error };
+};

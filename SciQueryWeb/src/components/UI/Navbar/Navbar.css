@@ -13,10 +13,11 @@ nav h1 {
 nav a {
   margin-right: 20px;
   color: #333;
+  text-decoration: none;
   padding: 4px 10px;
 }
 nav a.active {
-  color : white;
+  color: white;
   background: #333;
   text-decoration: none;
 }
@@ -26,10 +27,8 @@ nav a.active {
   display: flex;
   justify-content: center;
   margin: 0;
-  
   align-items: center;
   padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar h1 {
@@ -41,7 +40,7 @@ nav a.active {
 .search {
   --background: #ffffff;
   --text-color: #414856;
-  --primary-color: #4F29F0;
+  --primary-color: #4f29f0;
   --border-radius: 10px;
   --width: 600px;
   --height: 55px;
@@ -61,7 +60,7 @@ nav a.active {
   position: relative;
   width: var(--height);
   height: var(--height);
-  font: 400 16px 'Varela Round', sans-serif;
+  font: 400 16px "Varela Round", sans-serif;
   color: var(--text-color);
   border: 0;
   box-sizing: border-box;

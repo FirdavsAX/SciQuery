@@ -7,6 +7,13 @@
     border-radius: 10px;
     background-color: #f9f9f9;
   }
+  .question-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   
   .question-container-item h6,
   .question-container-item h5 {

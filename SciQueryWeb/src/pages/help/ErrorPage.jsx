@@ -1,42 +1,38 @@
-import { NavLink } from "react-router-dom";
-import { useRouteError } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+
 function ErrorPage() {
-  const error = useRouteError();
-  console.log(error);
-  if (error.status === 404) {
+  const location = useLocation();
+  const error = location.state?.error;
+
+  console.log("Error on ErrorPage:", error);
+
+  if (error?.response?.status === 404) {
     return (
       <div className="error-container">
-        <h1>👇PageNotFound👇</h1>
+        <h1>👇Page Not Found👇</h1>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias
-          rem corporis veritatis sint, velit at nobis eum consectetur, autem
-          odio numquam tempora vel sunt, possimus atque non amet libero!
-          Doloribus voluptates porro unde non soluta. Quibusdam voluptas laborum
-          optio ducimus, a minus debitis amet sit accusamus, ad reiciendis, quos
-          quis.
+          The page you are looking for might have been removed or is temporarily unavailable.
         </p>
         <NavLink to="/">Home Page</NavLink>
       </div>
     );
-  } else if (error.status === 401) {
-    <div className="error-container">
-      <h1>Unauthorized</h1>
-      {toast.warning(error.message)};
-      {window.history.pushState({}, "LoginPage", "/login")}
-      <NavLink to="/">Home Page</NavLink>
-    </div>;
+  } else if (error?.response?.status === 401) {
+    console.log(error);
+    toast.warning(error.message);
+    window.history.pushState({}, "LoginPage", "/login");
+    return (
+      <div className="error-container">
+        <h1>Unauthorized</h1>
+        <NavLink to="/">Home Page</NavLink>
+      </div>
+    );
   } else {
     return (
       <div className="error-container">
         <h1>Something went wrong</h1>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias
-          rem corporis veritatis sint, velit at nobis eum consectetur, autem
-          odio numquam tempora vel sunt, possimus atque non amet libero!
-          Doloribus voluptates porro unde non soluta. Quibusdam voluptas laborum
-          optio ducimus, a minus debitis amet sit accusamus, ad reiciendis, quos
-          quis.
+          There was an unexpected error. Please try again later.
         </p>
         <NavLink to="/">Home Page</NavLink>
       </div>

@@ -33,8 +33,6 @@ function CreateAndUpdateQuestionPage() {
 
     const res = await uploadImage(images, "questions/upload-image");
     question.imagePaths = res;
-    console.log(res);
-    console.log(question.imagePaths)
     const result = await create(question);
 
     navigate(`/questions/${result.id}`);
@@ -48,8 +46,10 @@ function CreateAndUpdateQuestionPage() {
       <TitleInput title={title} setTitle={setTitle} titleRef={titleRef} />
       <ImageInput images={images} setImages={setImages} />
       <BodyEditor
+      title={"Write your problem"}
         body={body}
         setBody={setBody}
+        buttonTitle={"Next"}
         editorRef={editorRef}
         handleScroll={handleScroll}
       />

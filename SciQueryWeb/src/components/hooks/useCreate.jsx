@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { postData } from "../../services/ApiService"; // Ensure this is correctly imported
+import { postData } from "../../services/ApiService";
 
 export const useCreate = (url) => {
   const [loading, setLoading] = useState(false);
+  
 
   const create = async (data) => {
     setLoading(true);
@@ -10,21 +11,21 @@ export const useCreate = (url) => {
       const result = await postData(url, data);
       setLoading(false);
       return result;
-    } catch (err) {
+    } catch (error) {
       setLoading(false);
-      throw err;
+      console.error("Error in create:", error);
+      throw error;
     }
   };
 
-  const uploadImage = async (images, url) => {
+  const uploadImage = async (images, uploadUrl) => {
     setLoading(true);
-
     try {
       const uploadPromises = images.map(async (image) => {
         const formData = new FormData();
         formData.append("file", image);
 
-        const result = await postData(url, formData);
+        const result = await postData(uploadUrl, formData);
         return result;
       });
 

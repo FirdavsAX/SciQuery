@@ -16,9 +16,7 @@ const Sidebar = () => {
             <NavLink to="/questions" data-text="Questions">Questions</NavLink>
           </li>
           <li>
-            <a href="#" data-text="Profile">
-              Profile
-            </a>
+            <NavLink to="/profile/" data-text="Profile">Profile</NavLink>
           </li>
           <li>
             <a href="#" data-text="Tags">

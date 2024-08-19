@@ -8,9 +8,9 @@ import { ToastContainer } from "react-toastify";
 function RootLayout() {
   return (
     <>
+        <Navbar />
       <header className="sticky-top">
         <Sidebar />
-        <Navbar />
       </header>
       <main>
         <Outlet />

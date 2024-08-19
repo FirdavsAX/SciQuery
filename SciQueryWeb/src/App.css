@@ -13,6 +13,7 @@ body {
   background: whitesmoke;
   margin-left: 250px;
   margin-right:100px;
+  min-height: 100vh;
 }
 
 /* Form styles */

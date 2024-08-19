@@ -1,10 +1,6 @@
-import React, { useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
-import { NavLink } from "react-router-dom";
 import QuestionItem from "../QuestionItem/QuestionItem";
 import Spinner from "../../Spinner/Spinner";
-import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import { API_BASE_URL } from "../../../config/Constants";
 import NotificationComponent from "../../Notification/NotificationComponent";
 
 function QuestionsList() {
@@ -12,8 +8,7 @@ function QuestionsList() {
     data: questions,
     isPending,
     error,
-  } = useFetch(API_BASE_URL + "questions");
-
+  } = useFetch("questions");
   return (
     <div>
 <NotificationComponent/>
