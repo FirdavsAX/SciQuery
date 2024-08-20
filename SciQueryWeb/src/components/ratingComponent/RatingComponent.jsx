@@ -1,20 +1,41 @@
-import React from 'react';
-import { FaArrowUp, FaArrowDown, FaTrash } from 'react-icons/fa';
-import './RatingComponent.css'; // Import your CSS file
+import React, { useState } from "react";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { GoRepo } from "react-icons/go";
+import "./RatingComponent.css";
+import { useCreate } from "../hooks/useCreate";
 
-const RatingComponent = ({votes = 0}) => {
-  const votesCount = votes; 
-    return (
+const RatingComponent = ({ postId, postType, initialVotes }) => {
+  const [votes, setVotes] = useState(initialVotes || 0);
+  const { createByUrl, loading } = useCreate("votes/");
+
+  const handleVote = async (voteType) => {
+    const url = voteType === 1 ? "upvote" : "downvote";
+    const vote = { postId, postType };
+
+    await createByUrl(url, vote);
+
+    voteType === 1 ? setVotes(votes + 1) : setVotes(votes - 1);
+  };
+
+  return (
     <div className="icon-container">
-      <button className="icon-button" aria-label="Move Up">
+      <button
+        onClick={() => handleVote(1)}
+        className="icon-button upvote-button"
+        aria-label="Upvote"
+      >
         <FaArrowUp />
       </button>
-        <h2>{votesCount}</h2>
-      <button className="icon-button" aria-label="Move Down">
+      <h2 className="votes-count">{votes}</h2>
+      <button
+        onClick={() => handleVote(-1)}
+        className="icon-button downvote-button"
+        aria-label="Downvote"
+      >
         <FaArrowDown />
       </button>
-      <button className="icon-button" aria-label="Delete">
-        <FaTrash />
+      <button className="icon-button delete-button" aria-label="Delete">
+        <GoRepo />
       </button>
     </div>
   );

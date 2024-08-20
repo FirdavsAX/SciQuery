@@ -12,7 +12,7 @@ import CommentList from "../../comments/commentDisplay/CommentsList/CommentsList
 function QuestionDetail() {
   const { id } = useParams();
   const url = `questions/${id}`;
-  const { data: fullQuestion, isPending, error } = useFetch(url);
+  const { data: fullQuestion, isPending } = useFetch(url);
   const images =
     fullQuestion &&
     fullQuestion.images &&
@@ -23,11 +23,10 @@ function QuestionDetail() {
   return (
     <div className="question-container mt-4">
       {isPending && <Spinner />}
-      {error && <div className="alert alert-danger">{error}</div>}
 
       {fullQuestion && (
         <div className="question-detail mx-auto p-4 mb-4">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between m-5 ml-5 gap-5">
             <div>
               <h2 className="mb-4">
                 {fullQuestion.title || "No title available"}

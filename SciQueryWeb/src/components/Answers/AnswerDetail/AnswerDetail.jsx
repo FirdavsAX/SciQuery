@@ -6,7 +6,6 @@ import RatingComponent from "../../ratingComponent/RatingComponent";
 import HTMLReactParser from "html-react-parser";
 
 function AnswerDetail({ answer }) {
-  console.log("Rendering AnswerDetail with answer:", answer);
 
   if (!answer) {
     return <div>No answer provided</div>;
@@ -19,7 +18,7 @@ function AnswerDetail({ answer }) {
           {HTMLReactParser(answer.body) || "No answer body"}
         </div>
         <div className="answer-rating">
-          <RatingComponent votes={answer.votes || 0} />
+          <RatingComponent initialVotes={answer.votes} postId={answer.id} postType={0} />
         </div>
       </div>
 

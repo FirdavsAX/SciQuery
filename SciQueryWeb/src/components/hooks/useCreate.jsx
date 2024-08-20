@@ -3,12 +3,23 @@ import { postData } from "../../services/ApiService";
 
 export const useCreate = (url) => {
   const [loading, setLoading] = useState(false);
-  
 
   const create = async (data) => {
-    setLoading(true);
+    setLoading(true); 
     try {
       const result = await postData(url, data);
+      setLoading(false);
+      return result;
+    } catch (error) {
+      setLoading(false);
+      console.error("Error in create:", error);
+      throw error;
+    }
+  };
+  const createByUrl = async (childUrl,data) => {
+    setLoading(true); 
+    try {
+      const result = await postData(url + childUrl, data);
       setLoading(false);
       return result;
     } catch (error) {
@@ -43,5 +54,5 @@ export const useCreate = (url) => {
     }
   };
 
-  return { uploadImage, create, loading };
+  return { createByUrl,uploadImage, create, loading };
 };

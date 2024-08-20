@@ -1,28 +1,46 @@
-/* IconComponent.css */
 .icon-container {
-    display: flex;
-    flex-direction: column;
-    position:sticky;
-    margin-bottom: 0%;
-    gap: 10px; /* Adjust spacing between icons */
-  }
-  .icon-container h2{
-    font-size: 40px;
-    margin-left: 6px;
-  }
-  .icon-button {
-    background-color: #f0f0f0; /* Background color */
-    border: none;
-    height: 70px;
-    width: 40px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease; /* Smooth hover effect */
-  }
-  
-  .icon-button:hover {
-    background-color: #e0e0e0; /* Lighter background on hover */
-  }
-  
-  /* Customize other styles as needed */
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; /* Adjust spacing between icons */
+}
+
+.votes-count {
+  font-size: 36px;
+  margin: 0;
+  color: #333; /* Darker color for vote count */
+}
+
+.icon-button {
+  background-color: #f7f7f7;
+  border: none;
+  height: 60px;
+  width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect and button press */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666; /* Icon color */
+}
+
+.icon-button:hover {
+  background-color: #e1e1e1; /* Lighter background on hover */
+}
+
+.icon-button:active {
+  transform: scale(0.95); /* Scale down slightly when clicked */
+}
+
+.upvote-button {
+  color: #4caf50; /* Green for upvote */
+}
+
+.downvote-button {
+  color: #f44336; /* Red for downvote */
+}
+
+.delete-button {
+  color: #000000; /* Orange for delete */
+}
