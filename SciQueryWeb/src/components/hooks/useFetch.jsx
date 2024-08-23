@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import { getData } from '../../services/ApiService';
+import { useCheckToken } from './useCheckToken';
 
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
-
+  useCheckToken();  
   useEffect(() => {
     if (url) { // Only fetch if URL is valid
-      console.log(url);
       const fetchData = async () => {
         try {
-          console.log(url);
+          setIsPending(true);
           const result = await getData(url);
-          console.log(result);
           setData(result);
           setError(null);
         } catch (err) {

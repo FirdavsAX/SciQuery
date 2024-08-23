@@ -12,10 +12,6 @@ export const getData = async (url) => {
     });
     return response.data;
   } catch (error) {
-    console.error(error)(
-      "Error in getData",
-      error.response ? error.response.data : error.message
-    );
     throw error;
   }
 };
@@ -33,12 +29,9 @@ export const postData = async (url, data) => {
     });
     return response.data;
   } catch (error) {
-      console.log('asd' +  error)
-
-      if(error.status === 401){
-        window.localStorage.removeItem('token');
-        console.log('shu  yerda')
-      }
+    if (error.status === 401) {
+      window.localStorage.removeItem("token");
+    }
 
     throw error;
   }
@@ -46,7 +39,6 @@ export const postData = async (url, data) => {
 
 export const putData = async (url, data) => {
   url = API_BASE_URL + url;
-
   try {
     const response = await axios.put(url, data, {
       headers: {
@@ -57,9 +49,9 @@ export const putData = async (url, data) => {
     });
     return response.data;
   } catch (error) {
-      if(error.status === 401){
-        window.localStorage.removeItem('token');
-      }
+    if (error.status === 401) {
+      window.localStorage.removeItem("token");
+    }
 
     throw error;
   }

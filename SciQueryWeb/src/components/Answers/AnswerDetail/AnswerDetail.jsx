@@ -4,6 +4,7 @@ import CommentList from "../../comments/commentDisplay/CommentsList/CommentsList
 import ImageContainer from "../../images/imageContainer/ImageContainer";
 import RatingComponent from "../../ratingComponent/RatingComponent";
 import HTMLReactParser from "html-react-parser";
+import UserDetail from "../../User/UserMini/UserDetail";
 
 function AnswerDetail({ answer }) {
 
@@ -31,18 +32,13 @@ function AnswerDetail({ answer }) {
           />
         </div>
       )}
-      <div className="answer-user-dates">
-        <p className="answer-dates">
-          <small>Created Date:</small>{" "}
-          {new Date(answer.createdDate).toLocaleDateString()}
-          <br />
-          <small>Updated Date:</small>{" "}
-          {new Date(answer.updatedDate).toLocaleDateString()}
-        </p>
-        <p className="answer-user">
-          <small>User :</small> {answer.user?.userName || "Unknown user"}
-        </p>
-      </div>
+      
+      <UserDetail
+        user={answer.user} 
+        createdDate={answer.createdDate} 
+        updatedDate={answer.updatedDate} 
+      />
+
       {answer.comments && answer.comments.length > 0 && (
         <CommentList comments={answer.comments} />
       )}

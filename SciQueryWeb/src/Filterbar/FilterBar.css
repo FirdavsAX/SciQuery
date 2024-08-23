@@ -1,0 +1,109 @@
+/* FilterBar Container */
+.filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    width: 100%;
+    margin-left: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  /* FilterBar Button */
+  .toggle-filter {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .toggle-filter:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+  }
+  
+  .toggle-filter:active {
+    background-color: #004494;
+    transform: translateY(0);
+  }
+  
+  /* Filter Options Styles */
+  .filter-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+  }
+  
+  .filter-options label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #343a40;
+  }
+  
+  .filter-options input,
+  .filter-options select {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #495057;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .filter-options input:focus,
+  .filter-options select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(38, 143, 255, 0.25);
+  }
+  
+  /* Filter Actions Styles */
+  .filter-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .filter-actions button {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .filter-actions button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+  }
+  
+  .filter-actions button:active {
+    background-color: #004494;
+    transform: translateY(10);
+  }
+  
+  .filter-actions button.save-custom-filter {
+    background-color: #6c757d;
+  }
+  
+  .filter-actions button.save-custom-filter:hover {
+    background-color: #5a6268;
+  }
+  
+  .filter-actions button.save-custom-filter:active {
+    background-color: #4e555b;
+  }
+  

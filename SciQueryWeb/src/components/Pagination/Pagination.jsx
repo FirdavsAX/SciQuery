@@ -28,7 +28,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         ))}
         <button
           className="page-button"
-          disabled={currentPage === totalPages}
+          disabled={currentPage >= totalPages}
           onClick={() => onPageChange(currentPage + 1)}
         >
           Next

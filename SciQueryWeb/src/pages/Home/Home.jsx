@@ -7,8 +7,8 @@ export default function Home()
   return (
     <div>
       <div className="d-flex justify-content-between Align-items-center">
-        <h1>Top Questions</h1>
-        <NavLink className="button-5" role="button" to='questions/new'>Ask question</NavLink>
+        <h1>Eng yaxshi savollar</h1>
+        <NavLink className="button-5" role="button" to='questions/new'>Savol so'rang</NavLink>
       </div>
         <QuestionsList/> 
     </div>

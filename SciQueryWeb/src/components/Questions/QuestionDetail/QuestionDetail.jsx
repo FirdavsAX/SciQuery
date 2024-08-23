@@ -8,6 +8,7 @@ import "./QuestionDetail.css";
 import ImageContainer from "../../images/imageContainer/ImageContainer";
 import RatingComponent from "../../ratingComponent/RatingComponent";
 import CommentList from "../../comments/commentDisplay/CommentsList/CommentsList";
+import UserDetail from "../../User/UserMini/UserDetail";
 
 function QuestionDetail() {
   const { id } = useParams();
@@ -34,21 +35,15 @@ function QuestionDetail() {
               <div className="question-body">
                 {HtmlParser(fullQuestion.body) || "No body available"}
               </div>
-              <div className="mb-4">
-                <p>
-                  <strong>Created Date:</strong>{" "}
-                  {new Date(fullQuestion.createdDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <strong>Updated Date:</strong>{" "}
-                  {new Date(fullQuestion.updatedDate).toLocaleDateString()}
-                </p>
-              </div>
             </div>
             <div className="rating-container">
-              <RatingComponent
-                votes={fullQuestion.votes ? fullQuestion.votes : 0}
-              />
+              {fullQuestion && (
+                <RatingComponent
+                  initialVotes={fullQuestion.votes ? fullQuestion.votes : 0}
+                  postId={fullQuestion.id}
+                  postType={1}
+                />
+              )}
             </div>
           </div>
 
@@ -59,13 +54,18 @@ function QuestionDetail() {
               <p>No images available</p>
             )}
           </div>
+          <div className="mb-4">
+            <UserDetail
+              user={fullQuestion.user}
+              createdDate={fullQuestion.createdDate}
+              updatedDate={fullQuestion.updatedDate}
+            />
+          </div>
           {fullQuestion.comments && fullQuestion.comments.length > 0 && (
             <CommentList comments={fullQuestion.comments} />
           )}
         </div>
       )}
-
-     
     </div>
   );
 }

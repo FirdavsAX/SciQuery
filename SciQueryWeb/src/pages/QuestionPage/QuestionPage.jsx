@@ -1,14 +1,15 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 function QuestionPage() {
+  const [search,setSearch] = useOutletContext();
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center">
         <div></div>
-        <NavLink className="button-5" role="button" to='/new'>Ask question</NavLink>
+        <NavLink className="button-5" role="button" to='/new'>Savol so'rang</NavLink>
       </div><hr />
-      <Outlet />
+      <Outlet context={[search,setSearch]}/>
     </div>
   );
 }

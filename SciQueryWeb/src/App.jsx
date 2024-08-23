@@ -18,6 +18,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import AnswersList from "./components/Answers/AnswersList/AnswersList";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import UserProfilePage from "./pages/ProfilePage/UserProfilePage/UserProfilePage";
 
 
 function App() {
@@ -39,7 +40,11 @@ function App() {
         ]},
         {
           path : 'profile',
-          element : <ProfilePage/>
+          element : <ProfilePage/>,
+        },
+        {
+          path : 'profile/:userId',
+          element : <UserProfilePage/>,
         },
         { path: "contact/", element: <ContactLayout />, children: [
           { path: "faq", element: <Faq /> },
@@ -59,7 +64,9 @@ function App() {
   ]);
     return (
     <div className="App">
-      <RouterProvider router={routes} />
+      <div className="content-wrap">
+       <RouterProvider router={routes} />
+      </div>
     </div>
   );
 }

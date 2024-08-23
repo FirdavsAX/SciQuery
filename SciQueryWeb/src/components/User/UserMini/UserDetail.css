@@ -1,0 +1,66 @@
+.user-dates,
+.user-name {
+  font-size: 14px;
+  color: #555;
+}
+user-detail a{
+  text-decoration: none;
+}
+.user-detail {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  max-width: max-content;
+  align-content: end;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.user-image{
+  width: 40px;
+  height: 40px;
+  margin-top: 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.user-reputation {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.user-reputation.high {
+  background-color: #4caf50;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+.user-reputation.medium {
+  background-color: #ff9800;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+.user-reputation.low {
+  background-color: #f44336;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+}

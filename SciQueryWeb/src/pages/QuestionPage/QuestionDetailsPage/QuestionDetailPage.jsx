@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useParams, Outlet } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import SpinnerMini from "../../../components/Spinner/SpinnerMini/SpinnerMini";
@@ -17,38 +17,18 @@ function QuestionDetailPage() {
   const { id } = useParams();
   const [showOutlet, setShowOutlet] = useState(false);
   const [showRelatedQuestions, setShowRelatedQuestions] = useState(false);
-  const questionDetailRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && entry.boundingClientRect.bottom <= window.innerHeight) {
-          setShowOutlet(true); // Show Outlet after QuestionDetail
-          setTimeout(() => setShowRelatedQuestions(true), 1000); // Delay to show RelatedQuestions
-          observer.disconnect(); // Stop observing once visible
-        }
-      },
-      { threshold: 1.0 } // Adjust as needed
-    );
-
-    if (questionDetailRef.current) {
-      observer.observe(questionDetailRef.current);
-    }
-
-    return () => {
-      if (questionDetailRef.current) {
-        observer.unobserve(questionDetailRef.current);
-      }
-    };
-  }, []);
+    // Ensure the outlet is shown as soon as QuestionDetail is loaded
+    setShowOutlet(true);
+    setTimeout(() => setShowRelatedQuestions(true), 1000); // Delay to show RelatedQuestions
+  }, [id]);
 
   return (
     <div className="page-container mt-4">
       <div className="question-container">
         <Suspense fallback={<Spinner />}>
-          <div ref={questionDetailRef}>
-            <QuestionDetail />
-          </div>
+          <QuestionDetail />
         </Suspense>
         {showOutlet && (
           <Suspense fallback={<SpinnerMini />}>

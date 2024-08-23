@@ -1,14 +1,10 @@
 import { NavLink } from "react-router-dom";
 import "./QuestionItem.css";
 import { useState } from "react";
+import UserDetail from "../../User/UserMini/UserDetail";
 
 const QuestionItem = (questionObject) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const timeAgo = (date) => {
-    // (Time ago calculation logic stays the same)
-  };
-
   const question = questionObject.question;
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -25,9 +21,7 @@ const QuestionItem = (questionObject) => {
             {isExpanded ? (
               <p>{question.body}</p>
             ) : (
-              <p className="question-content">
-                {question.body}
-              </p>
+              <p className="question-content">{question.body}</p>
             )}
             {question.body.length > 100 && !isExpanded && (
               <span onClick={toggleExpanded} className="read-more">
@@ -56,31 +50,28 @@ const QuestionItem = (questionObject) => {
               )}
             </div>
             <div className="d-flex justify-content-end align-items-center">
-              <p>
-                <NavLink to={`/profile/${question.user.id}`}>
-                  {question.user.userName}
-                </NavLink>
-                {question.createdDate < question.updatedDate ? (
-                  <> modified : {timeAgo(question.updatedDate)}</>
-                ) : (
-                  <> created : {timeAgo(question.createdDate)}</>
-                )}
-              </p>
+              <UserDetail
+                user={question.user}
+                createdDate={question.createdDate}
+                updatedDate={question.updatedDate}
+              />
             </div>
           </div>
           <div className="stats">
             <p className="mb-2">
               <small className="text-muted">
-                {question.answersCount} answered
+                {question.answersCount} ta javob berildi
               </small>
             </p>
             <p className="mb-2">
               <small className="text-muted">
-                {question.commentsCount} commented
+                {question.commentsCount} ta fikr yozildi
               </small>
             </p>
             <p className="mb-2">
-              <small className="text-muted">{question.votes} votes</small>
+              <small className="text-muted">
+                {question.votes} ta ovoz berildi
+              </small>
             </p>
           </div>
         </div>
