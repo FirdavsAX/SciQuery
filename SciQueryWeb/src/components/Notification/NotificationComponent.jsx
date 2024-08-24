@@ -78,7 +78,7 @@ const NotificationComponent = () => {
           <ul>
             {notifications.length > 0 ? (
               notifications.map((notification, index) => (
-                <li key={index}>{notification}</li>
+                <li key={index}>{notification.message}</li>
               ))
             ) : (
               <li>No notifications</li>

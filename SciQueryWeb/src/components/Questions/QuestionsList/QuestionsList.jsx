@@ -3,9 +3,7 @@ import { useSearchParams, useNavigate, useOutletContext } from "react-router-dom
 import { useFetch } from "../../hooks/useFetch";
 import QuestionItem from "../QuestionItem/QuestionItem";
 import Spinner from "../../Spinner/Spinner";
-import NotificationComponent from "../../Notification/NotificationComponent";
 import Pagination from "../../Pagination/Pagination";
-import NoConnection from '../../Spinner/SpinnerNoConnection/NoConnection';
 import FilterBar from "../../../Filterbar/FilterBar";
 
 function QuestionsList() {

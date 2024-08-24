@@ -19,6 +19,8 @@ import Register from "./pages/Auth/Register";
 import AnswersList from "./components/Answers/AnswersList/AnswersList";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import UserProfilePage from "./pages/ProfilePage/UserProfilePage/UserProfilePage";
+import PostsPage from "./pages/Posts/PostsPage";
+import MyQuestions from "./pages/Posts/MyQuestions/MyQuestions";
 
 
 function App() {
@@ -41,6 +43,16 @@ function App() {
         {
           path : 'profile',
           element : <ProfilePage/>,
+        },
+        {
+          path : 'posts',
+          element : <PostsPage/>,
+          children : [
+            {
+              index : true,
+              element : <MyQuestions/>
+            }
+          ]
         },
         {
           path : 'profile/:userId',
