@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Spinner from "../../Spinner/Spinner";
 import "./QuestionDetail.css";
+import CommentSection from "../../comments/CommentSection/CommentSection";
 
 // Lazy load components
 const ImageContainer = lazy(() =>
@@ -78,7 +79,7 @@ function QuestionDetail() {
           <div className="mb-4">
             { (
               <Suspense fallback={<Spinner />}>
-                <CommentList postType={1} postId={fullQuestion.id} />
+                <CommentSection questionId={fullQuestion.id} />
               </Suspense>
             )}
           </div>

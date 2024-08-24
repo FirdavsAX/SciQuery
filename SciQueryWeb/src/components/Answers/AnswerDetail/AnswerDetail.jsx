@@ -5,6 +5,7 @@
   import RatingComponent from "../../ratingComponent/RatingComponent";
   import HTMLReactParser from "html-react-parser";
   import UserDetail from "../../User/UserMini/UserDetail";
+import CommentSection from "../../comments/CommentSection/CommentSection";
 
   function AnswerDetail({ answer }) {
 
@@ -40,7 +41,7 @@
         />
 
         {(
-          <CommentList postId={answer.id}  postType={0}/>
+          <CommentSection answerId={answer.id}/>
         )}
       </div>
     );

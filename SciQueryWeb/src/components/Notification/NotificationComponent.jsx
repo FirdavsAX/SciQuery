@@ -19,58 +19,67 @@ const NotificationComponent = () => {
       .withAutomaticReconnect()
       .build();
 
-    connect
-      .start()
-      .then(() => {
-        console.log("Connected to SignalR Hub");
-        setConnection(connect);
-      })
-      .catch((err) => {
-        console.error("Error connecting to SignalR Hub:", err);
-        // Optional: Retry logic with exponential backoff
-        setTimeout(() => connect.start().catch(console.error), 5000);
-      });
-
-    return () => {
-      connect.stop();
-    };
+    setConnection(connect);
   }, []);
 
   useEffect(() => {
     if (connection) {
-      connection.on("ReceiveNotification", (message) => {
-        console.log("Received specific notification:", message);
-        setNotifications((prevNotifications) => [
-          ...prevNotifications,
-          message,
-        ]);
-      });
+      connection
+        .start()
+        .then(() => {
+          connection.on("ReceiveOldNotifications", (oldNotifications) => {
+            setNotifications((prevNotifications) => {
+              const combinedNotifications = [
+                ...prevNotifications,
+                ...oldNotifications.filter(
+                  (newNotification) =>
+                    !prevNotifications.some(
+                      (notification) => notification.id === newNotification.id
+                    )
+                ),
+              ];
+              return combinedNotifications;
+            });
+          });
 
-      return () => {
-        connection.off("ReceiveNotification");
-      };
+          connection.on("ReceiveNotification", (message) => {
+            setNotifications((prevNotifications) => {
+              const exists = prevNotifications.some(
+                (notification) => notification.id === message.id
+              );
+              if (!exists) {
+                return [...prevNotifications, { ...message, read: false }];
+              }
+              return prevNotifications;
+            });
+          });
+        })
+        .catch((e) => console.log("Connection failed!", e));
     }
   }, [connection]);
 
-  const handleSend = async () => {
-    if (connection) {
-      try {
-        await connection.invoke("SendNotification", "balrog");
-      } catch (err) {
-        console.error("Error sending notification:", err);
-      }
-    }
-  };
-
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
+    // Mark notifications as read when dropdown is opened
+    if (isDropdownOpen) {
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) => ({
+          ...notification,
+          read: true,
+        }))
+      );
+    }
   };
 
   return (
     <div className="notification-container">
       <div className="notification-bell" onClick={toggleDropdown}>
         <FontAwesomeIcon icon={faBell} />
-        {notifications.length > 0 && <span className="badge">{notifications.length}</span>}
+        {notifications.some((n) => !n.read) && (
+          <span className="badge">
+            {notifications.filter((n) => !n.read).length}
+          </span>
+        )}
       </div>
       {isDropdownOpen && (
         <div className="notification-dropdown">
@@ -78,13 +87,17 @@ const NotificationComponent = () => {
           <ul>
             {notifications.length > 0 ? (
               notifications.map((notification, index) => (
-                <li key={index}>{notification.message}</li>
+                <li
+                  key={index}
+                  className={notification.read ? "read" : "unread"}
+                >
+                  {notification.message}
+                </li>
               ))
             ) : (
               <li>No notifications</li>
             )}
           </ul>
-          <button onClick={handleSend}>Send Test Notification</button>
         </div>
       )}
     </div>
