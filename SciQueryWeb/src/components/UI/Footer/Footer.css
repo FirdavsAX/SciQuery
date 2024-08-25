@@ -1,0 +1,21 @@
+.footer {
+  background-color: whitesmoke;
+  color: black;
+  padding: 40px 0;
+  padding-left: 20px;
+  width: 100%;
+  bottom: 0;
+  position: inherit; /* Change 'inherit' to 'fixed' */
+}
+
+  .footer a {
+    color: #000000;
+    text-decoration: none;
+  }
+  .footer a:hover {
+    color: black;
+  }
+  .footer .social-icons a {
+    font-size: 24px;
+    margin-right: 15px;
+  }

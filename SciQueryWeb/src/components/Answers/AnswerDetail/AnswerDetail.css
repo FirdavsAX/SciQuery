@@ -1,0 +1,25 @@
+.answer-detail {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+}
+
+.answer-body {
+  font-size: 1.2rem; /* Slightly larger font size */
+  color: #333; /* Darker color for better readability */
+  line-height: 1.6; /* Increased line height for better text spacing */
+  margin-bottom: 1rem; /* Space below the body text */
+  text-align: justify; /* Justify text for a cleaner look */
+}
+
+.answer-rating {
+  margin-left: 1rem;
+}
+
+.answer-dates {
+  font-size: 0.9rem;
+  color: #666;
+  margin-left: 1rem;
+}

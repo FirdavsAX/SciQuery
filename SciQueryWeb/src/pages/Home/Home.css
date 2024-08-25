@@ -1,0 +1,46 @@
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #4CAF50; /* Updated to a more standard green */
+  border: 1px solid transparent;
+  border-radius: 0.25rem; /* Slightly larger radius for a softer look */
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px; /* Enhanced shadow for depth */
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px; /* Slightly larger font for readability */
+  font-weight: 500; /* Slightly bolder font */
+  justify-content: center;
+  line-height: 1.2; /* Improved line height for better text alignment */
+  height: 50px;
+  margin: 0;
+  margin-top: 8px;
+  min-height: 1rem;
+  padding: 12px 24px; /* Updated padding for more comfortable spacing */
+  position: relative;
+  text-decoration: none;
+  transition: all 200ms ease-in-out; /* Smoother transition */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #45a049; /* Darker shade for hover effect */
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 8px; /* Stronger shadow on hover */
+}
+
+.button-5:hover {
+  transform: translateY(-2px); /* Slightly more pronounced lift on hover */
+}
+
+.button-5:active {
+  background-color: #3e8e41; /* Even darker shade for active state */
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  transform: translateY(0);
+}

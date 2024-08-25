@@ -1,0 +1,46 @@
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; /* Adjust spacing between icons */
+}
+
+.votes-count {
+  font-size: 36px;
+  margin: 0;
+  color: #333; /* Darker color for vote count */
+}
+
+.icon-button {
+  background-color: #f7f7f7;
+  border: none;
+  height: 60px;
+  width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect and button press */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666; /* Icon color */
+}
+
+.icon-button:hover {
+  background-color: #e1e1e1; /* Lighter background on hover */
+}
+
+.icon-button:active {
+  transform: scale(0.95); /* Scale down slightly when clicked */
+}
+
+.upvote-button {
+  color: #4caf50; /* Green for upvote */
+}
+
+.downvote-button {
+  color: #f44336; /* Red for downvote */
+}
+
+.delete-button {
+  color: #000000; /* Orange for delete */
+}

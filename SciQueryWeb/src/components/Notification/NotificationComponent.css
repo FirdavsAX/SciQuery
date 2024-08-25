@@ -1,0 +1,84 @@
+.notification-container {
+  position: relative;
+}
+
+.notification-bell {
+  cursor: pointer;
+  position: relative;
+  font-size: 24px;
+}
+
+.notification-bell .badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #dc3545; /* Red for badge */
+  color: white;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 4px;
+}
+
+.notification-dropdown h4 {
+  margin: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+}
+
+.notification-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-dropdown li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #555;
+  transition: background-color 0.3s;
+}
+
+.notification-dropdown li.read {
+  background-color: #f8f9fa;
+}
+
+.notification-dropdown li.unread {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+.notification-dropdown li:hover {
+  background-color: #f1f1f1;
+}
+
+.notification-dropdown button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0 0 4px 4px;
+}
+
+.notification-dropdown button:hover {
+  background-color: #0056b3;
+}
