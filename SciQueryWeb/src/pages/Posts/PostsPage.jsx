@@ -7,13 +7,13 @@ const PostsPage = () => {
     <div className="posts-page-container">
       <div className="tabs-container">
         <NavLink to="" className={({ isActive }) => (isActive ? "tab active" : "tab")}>
-          My Questions
+          Mening savollarim
         </NavLink>
         <NavLink to="my-answers" className={({ isActive }) => (isActive ? "tab active" : "tab")}>
-          My Answers
+          Mening javoblarim
         </NavLink>
         <NavLink to="my-comments" className={({ isActive }) => (isActive ? "tab active" : "tab")}>
-          My Comments
+          Mening fikrlarim
         </NavLink>
       </div>
 

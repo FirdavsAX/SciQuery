@@ -6,7 +6,6 @@ import Spinner from "../../../components/Spinner/Spinner";
 import Pagination from "../../../components/Pagination/Pagination";
 import { useUserIdFromToken } from "../../../components/hooks/useUserIdFromToken";
 import AnswerDetail from "../../../components/Answers/AnswerDetail/AnswerDetail";
-import CommentList from "../../../components/comments/commentDisplay/CommentsList/CommentsList";
 
 function MyQuestions() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,7 +33,11 @@ function MyQuestions() {
       {isPending && <Spinner showImg={true} />}
       {paginatedList && paginatedList.data && (
         <>
-          <CommentList comments={paginatedList.data}/>
+          {paginatedList.data.map((answer) => (
+            <div key={answer.id}>
+              <AnswerDetail answer={answer} />
+            </div>
+          ))}
 
           <Pagination
             currentPage={currentPage}

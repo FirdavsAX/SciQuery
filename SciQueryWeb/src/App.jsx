@@ -21,7 +21,8 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import UserProfilePage from "./pages/ProfilePage/UserProfilePage/UserProfilePage";
 import PostsPage from "./pages/Posts/PostsPage";
 import MyQuestions from "./pages/Posts/MyQuestions/MyQuestions";
-
+import MyAnswers from './pages/Posts/MyAnswers/MyAnswers'
+import MyComments from './pages/Posts/MyComments/MyComments'
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -51,7 +52,16 @@ function App() {
             {
               index : true,
               element : <MyQuestions/>
+            },
+            {
+              path : "my-answers",
+              element : <MyAnswers/>
+            },
+            {
+              path : "my-comments",
+              element : <MyComments/>
             }
+
           ]
         },
         {
