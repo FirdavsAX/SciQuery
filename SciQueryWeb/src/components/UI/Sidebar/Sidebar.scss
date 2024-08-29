@@ -20,7 +20,7 @@ $menu-link-active-colors: var(--primary-color), var(--info-color),
 
 .menu-hover-fill {
   position: fixed;
-  top: 0;
+  top: 100px;
   left: 0;
   bottom: 0;
   box-sizing: border-box;
@@ -28,7 +28,7 @@ $menu-link-active-colors: var(--primary-color), var(--info-color),
   flex-direction: column;
   justify-content: center;
   padding-bottom: 10%;
-  width: 200px;
+  width: 220px;
 
   li {
     position: relative;
@@ -98,7 +98,7 @@ $menu-link-active-colors: var(--primary-color), var(--info-color),
   top: 0;
   left: 0;
   height: 100%;
-  width: 200px;
+  width: 220px;
   background-color: #000000;
   margin: 0;
   height: 100%;

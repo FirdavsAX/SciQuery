@@ -13,7 +13,9 @@ import QuestionsList from "./components/Questions/QuestionsList/QuestionsList";
 import ErrorPage from "./pages/help/ErrorPage";
 import CreateAndUpdateQuestionPage from "./pages/QuestionPage/Create/CreateAndUpdateQuestionPage";
 import { lazy, Suspense, useState } from "react";
-const QuestionDetailPage = lazy(() => import("./pages/QuestionPage/QuestionDetailsPage/QuestionDetailPage"));
+const QuestionDetailPage = lazy(() =>
+  import("./pages/QuestionPage/QuestionDetailsPage/QuestionDetailPage")
+);
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import AnswersList from "./components/Answers/AnswersList/AnswersList";
@@ -21,8 +23,9 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import UserProfilePage from "./pages/ProfilePage/UserProfilePage/UserProfilePage";
 import PostsPage from "./pages/Posts/PostsPage";
 import MyQuestions from "./pages/Posts/MyQuestions/MyQuestions";
-import MyAnswers from './pages/Posts/MyAnswers/MyAnswers'
-import MyComments from './pages/Posts/MyComments/MyComments'
+import MyAnswers from "./pages/Posts/MyAnswers/MyAnswers";
+import MyComments from "./pages/Posts/MyComments/MyComments";
+import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -34,60 +37,77 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "about", element: <About /> },
-        { path: "questions", element: <QuestionPage />, children: [
-          { index: true, element: <QuestionsList /> },
-          { path: "new", element: <CreateAndUpdateQuestionPage /> },
-        ]},
-        { path: "questions/:id", element: <Suspense><QuestionDetailPage /></Suspense>, children: [
-          { index: true, element: <AnswersList /> },
-        ]},
         {
-          path : 'profile',
-          element : <ProfilePage/>,
+          path: "questions",
+          element: <QuestionPage />,
+          children: [
+            { index: true, element: <QuestionsList /> },
+            { path: "new", element: <CreateAndUpdateQuestionPage /> },
+            { path: "edit/:id", element: <CreateAndUpdateQuestionPage /> },
+          ],
         },
         {
-          path : 'posts',
-          element : <PostsPage/>,
-          children : [
+          path: "questions/:id",
+          element: (
+            <Suspense>
+              <QuestionDetailPage />
+            </Suspense>
+          ),
+          children: [{ index: true, element: <AnswersList /> }],
+        },
+        {
+          path: "profile",
+          element: <ProfilePage />,
+        },
+        {
+          path: "posts",
+          element: <PostsPage />,
+          children: [
             {
-              index : true,
-              element : <MyQuestions/>
+              index: true,
+              element: <MyQuestions />,
             },
             {
-              path : "my-answers",
-              element : <MyAnswers/>
+              path: "my-answers",
+              element: <MyAnswers />,
             },
             {
-              path : "my-comments",
-              element : <MyComments/>
-            }
-
-          ]
+              path: "my-comments",
+              element: <MyComments />,
+            },
+          ],
         },
         {
-          path : 'profile/:userId',
-          element : <UserProfilePage/>,
+          path: "profile/:userId",
+          element: <UserProfilePage />,
         },
-        { path: "contact/", element: <ContactLayout />, children: [
-          { path: "faq", element: <Faq /> },
-          { path: "form", element: <Form /> },
-        ]},
+        {
+          path: "notifications/",
+          element: <NotificationsPage />,
+        },
+        {
+          path: "contact/",
+          element: <ContactLayout />,
+          children: [
+            { path: "faq", element: <Faq /> },
+            { path: "form", element: <Form /> },
+          ],
+        },
       ],
     },
     {
-      path : '/error',
-      element : <ErrorPage />
-
+      path: "/error",
+      element: <ErrorPage />,
     },
     {
       path: "/register",
       element: <Register setToken={setToken} />,
     },
   ]);
-    return (
+  return (
     <div className="App">
       <div className="content-wrap">
-       <RouterProvider router={routes} />
+        <RouterProvider router={routes} />
       </div>
     </div>
   );

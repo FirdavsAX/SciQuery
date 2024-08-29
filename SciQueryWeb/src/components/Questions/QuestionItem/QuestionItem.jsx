@@ -3,9 +3,9 @@ import "./QuestionItem.css";
 import { useState } from "react";
 import UserDetail from "../../User/UserMini/UserDetail";
 
-const QuestionItem = (questionObject) => {
+const QuestionItem = ({ question, handleTagSelection }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const question = questionObject.question;
+
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
   };
@@ -21,7 +21,7 @@ const QuestionItem = (questionObject) => {
             {isExpanded ? (
               <p>{question.body}</p>
             ) : (
-              <p className="question-content">{question.body}</p>
+              <p className="question-content">{question.body.slice(0, 100) + '...'}</p>
             )}
             {question.body.length > 100 && !isExpanded && (
               <span onClick={toggleExpanded} className="read-more">
@@ -39,14 +39,15 @@ const QuestionItem = (questionObject) => {
               {question.tags && question.tags.length > 0 ? (
                 question.tags.map((tag, index) => (
                   <div
-                    key={new Date().getMilliseconds() + index}
+                    onClick={() => handleTagSelection(tag.name)}
+                    key={index}
                     className="tags"
                   >
                     {tag.name}
                   </div>
                 ))
               ) : (
-                <p></p>
+                <p>No tags available</p>
               )}
             </div>
             <div className="d-flex justify-content-end align-items-center">

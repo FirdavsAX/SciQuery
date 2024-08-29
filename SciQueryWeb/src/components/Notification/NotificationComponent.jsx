@@ -1,83 +1,56 @@
-import React, { useEffect, useState } from "react";
-import * as signalR from "@microsoft/signalr";
-import { API_BASE_URL } from "../../config/Constants";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import "./NotificationComponent.css";
+import { NavLink } from "react-router-dom";
+import { useUpdate } from "../hooks/useUpdate";
+import { useNotifications } from "../hooks/useNotification";
 
 const NotificationComponent = () => {
-  const [notifications, setNotifications] = useState([]);
-  const [connection, setConnection] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const { markAsRead, getUnreadNotifications } = useNotifications();
+  const { update } = useUpdate();
+  const notifications = getUnreadNotifications();
+  const timeoutRef = useRef(null);
 
-  useEffect(() => {
-    const connect = new signalR.HubConnectionBuilder()
-      .withUrl(API_BASE_URL + "notificationHub", {
-        accessTokenFactory: () => window.localStorage.getItem("token"),
-      })
-      .configureLogging(signalR.LogLevel.Information)
-      .withAutomaticReconnect()
-      .build();
-
-    setConnection(connect);
-  }, []);
-
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then(() => {
-          connection.on("ReceiveOldNotifications", (oldNotifications) => {
-            setNotifications((prevNotifications) => {
-              const combinedNotifications = [
-                ...prevNotifications,
-                ...oldNotifications.filter(
-                  (newNotification) =>
-                    !prevNotifications.some(
-                      (notification) => notification.id === newNotification.id
-                    )
-                ),
-              ];
-              return combinedNotifications;
-            });
-          });
-
-          connection.on("ReceiveNotification", (message) => {
-            setNotifications((prevNotifications) => {
-              const exists = prevNotifications.some(
-                (notification) => notification.id === message.id
-              );
-              if (!exists) {
-                return [...prevNotifications, { ...message, read: false }];
-              }
-              return prevNotifications;
-            });
-          });
-        })
-        .catch((e) => console.log("Connection failed!", e));
-    }
-  }, [connection]);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-    // Mark notifications as read when dropdown is opened
-    if (isDropdownOpen) {
-      setNotifications((prevNotifications) =>
-        prevNotifications.map((notification) => ({
-          ...notification,
-          read: true,
-        }))
-      );
-    }
+  const handleMouseEnter = () => {
+    clearTimeout(timeoutRef.current); // Clear any pending close timeout
+    setDropdownOpen(true); // Open the dropdown on hover
   };
 
+  const handleMouseLeave = () => {
+    // Close the dropdown after 2 seconds of unhovering
+    timeoutRef.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 1600);
+  };
+
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
+    setDropdownOpen((prev) => !prev);
+  };
+
+  const handleNotificationClick = async (notification) => {
+    await markAsRead(notification, update);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutRef.current); // Clean up the timeout on component unmount
+    };
+  }, []);
+
   return (
-    <div className="notification-container">
+    <div
+      className="notification-container"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="notification-bell" onClick={toggleDropdown}>
         <FontAwesomeIcon icon={faBell} />
-        {notifications.some((n) => !n.read) && (
+        {notifications.length > 0 && (
           <span className="badge">
-            {notifications.filter((n) => !n.read).length}
+            {notifications.length}
           </span>
         )}
       </div>
@@ -89,15 +62,21 @@ const NotificationComponent = () => {
               notifications.map((notification, index) => (
                 <li
                   key={index}
-                  className={notification.read ? "read" : "unread"}
+                  className={notification.isRead ? "read" : "unread"}
                 >
-                  {notification.message}
+                  <NavLink
+                    to={`/questions/${notification.questionId}`}
+                    onClick={() => handleNotificationClick(notification)}
+                  >
+                    {notification.message}
+                  </NavLink>
                 </li>
               ))
             ) : (
               <li>No notifications</li>
             )}
           </ul>
+          <button onClick={toggleDropdown}>Close</button>
         </div>
       )}
     </div>

@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TitleInput from "../../../components/bodyEditor/Title";
 import BodyEditor from "../../../components/bodyEditor/BodyEditor";
 import TagsInput from "../../../components/bodyEditor/TagsInput";
 import useQuestionForm from "../../../components/hooks/useQuestionForm";
 import { useCreate } from "../../../components/hooks/useCreate";
 import Spinner from "../../../components/Spinner/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ImageInput from "../../../components/bodyEditor/ImageUploads/ImageInput";
+import { useFetch } from "../../../components/hooks/useFetch";
 
 function CreateAndUpdateQuestionPage() {
+
+  const { id } = useParams();
+  const url = `questions/${id}`;
+  const {
+    data: question,
+  } = id && useFetch(url);
+
   const {
     title,
     setTitle,
@@ -27,6 +35,11 @@ function CreateAndUpdateQuestionPage() {
 
   const { uploadImage, create, loading } = useCreate("questions/");
   const navigate = useNavigate();
+  
+
+  const editImages = question?.images?.map(
+    (image) => `data:${image.contentType};base64,${image.bytes}`
+  );
 
   const createQuestion = async () => {
     const question = { title, body, imagePaths: [], tags };
@@ -42,11 +55,10 @@ function CreateAndUpdateQuestionPage() {
     <>
       <h1>Ask a public question</h1>
       <hr />
-
       <TitleInput title={title} setTitle={setTitle} titleRef={titleRef} />
       <ImageInput images={images} setImages={setImages} />
       <BodyEditor
-      title={"Write your problem"}
+        title={"Write your problem"}
         body={body}
         setBody={setBody}
         buttonTitle={"Next"}

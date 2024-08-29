@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 function QuestionPage() {
+
   const [search,setSearch] = useOutletContext();
   return (
     <div>

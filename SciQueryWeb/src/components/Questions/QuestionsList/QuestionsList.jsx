@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, useNavigate, useOutletContext } from "react-router-dom";
+import { useSearchParams, useOutletContext } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import QuestionItem from "../QuestionItem/QuestionItem";
 import Spinner from "../../Spinner/Spinner";
 import Pagination from "../../Pagination/Pagination";
 import FilterBar from "../../../Filterbar/FilterBar";
+import './QuestionsList.css'
+
 
 function QuestionsList() {
   const [search, setSearch] = useOutletContext();
@@ -24,7 +26,6 @@ function QuestionsList() {
     search: encodeURIComponent(searchQuery),
     pageNumber: currentPage
   };
-
   const { data: questions, isPending } = useFetch(`questions?${new URLSearchParams(filterParams).toString()}`);
   
   useEffect(() => {
@@ -40,16 +41,40 @@ function QuestionsList() {
     setCurrentPage(1); // Reset to the first page when filters are applied
   };
 
+  const handleTagSelection = (tag) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      tags: tag
+    }));
+    setCurrentPage(1); // Reset to the first page when tag is changed
+  };
+
+  const handleTagRemove = () => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      tags: ''
+    }));
+  };
+
   return (
     <div>
       <br />
-      <FilterBar onApplyFilter={handleApplyFilter} />
+      <FilterBar onApplyFilter={handleApplyFilter} onTagSelect={handleTagSelection} />
+      {filters.tags && (
+        <div className="selected-tags">
+          <span className="tag">
+            {filters.tags}
+            <button className="remove-tag-button" onClick={handleTagRemove}>X</button>
+          </span>
+        </div>
+      )}
       {isPending && <Spinner showImg={true} />}
+     
       {questions && questions.data && (
         <>
           {questions.data.map((question) => (
             <div key={question.id}>
-              <QuestionItem question={question} />
+              <QuestionItem question={question} handleTagSelection={handleTagSelection} />
             </div>
           ))}
       

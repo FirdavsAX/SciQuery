@@ -59,7 +59,7 @@ const FilterBar = ({ onApplyFilter }) => {
               onChange={handleFilterOptionsChange}
             />
             <TextInput
-              label="Teglar bilan : "
+              label="Teglar bilan :"
               value={searchTags}
               onChange={handleSearchTagsChange}
               placeholder="e.g. matematika yoki fizika"
@@ -123,7 +123,7 @@ const CheckboxGroup = ({ label, options, values, onChange }) => {
 const TextInput = ({ label, value, onChange, placeholder }) => {
   return (
     <div className="text-input">
-      <label>{label}</label>
+      <label>{label}</label><div></div>
       <input
         type="text"
         value={value}
