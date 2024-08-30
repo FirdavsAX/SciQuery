@@ -14,9 +14,7 @@ const useQuestionForm = () => {
     titleRef.current.scrollIntoView({ behavior: "smooth" });
   };
   const handleGetTags = (e) => {
-    setTagsInput(e);
-
-    const tagsArray = tagsInput.split(/[ ,.!?]+/).filter(Boolean);
+    const tagsArray = e.split(" ");
     setTags(tagsArray);
   };
   return {

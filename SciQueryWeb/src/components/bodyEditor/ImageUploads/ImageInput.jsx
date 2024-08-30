@@ -1,4 +1,3 @@
-// ImageInput.js
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import "./ImageInput.css";
@@ -11,7 +10,11 @@ const ImageInput = ({ images, setImages }) => {
 
   const handleImageUpload = (e) => {
     e.preventDefault();
-    const newImages = Array.from(e.target.files);
+    const newImages = Array.from(e.target.files).map(file => ({
+      file,
+      isNew: true,
+    }));
+
     if (images.length + newImages.length <= 5) {
       setImages((prevImages) => [...prevImages, ...newImages]);
     } else {
@@ -33,7 +36,7 @@ const ImageInput = ({ images, setImages }) => {
       <hr />
       <label className="custom-file-upload d-flex justify-content-center">
         <input type="file" id="file" multiple onChange={handleImageUpload} />
-        Upload Image
+        Rasm yuklash
       </label>
     </div>
   );

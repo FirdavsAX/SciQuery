@@ -3,7 +3,7 @@ import React from "react";
 const TitleInput = ({ title, setTitle, titleRef }) => (
   <div className="card mb-5">
     <div className="card-body">
-      <h5 className="card-title">Title</h5>
+      <h5 className="card-title">Sarlavha</h5>
       <input
         type="text"
         className="form-control"

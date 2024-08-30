@@ -8,6 +8,7 @@ import Spinner from "../../../components/Spinner/Spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import ImageInput from "../../../components/bodyEditor/ImageUploads/ImageInput";
 import { useFetch } from "../../../components/hooks/useFetch";
+import {useUpdate} from '../../../components/hooks/useUpdate'
 
 function CreateAndUpdateQuestionPage() {
 
@@ -34,26 +35,48 @@ function CreateAndUpdateQuestionPage() {
   } = useQuestionForm();
 
   const { uploadImage, create, loading } = useCreate("questions/");
+  const { update } = id && useUpdate(url);
   const navigate = useNavigate();
   
+  useEffect(() => {
+    if (question) {
+      setTitle(question.title || "");
+      setBody(question.body || "");
+      setTagsInput(question.tags.join(' ') || []);
+      
+      const formattedImages = question.images?.map(
+        (image) => `data:${image.contentType};base64,${image.bytes}`
+      ) || [];
+      setImages(formattedImages);
+    }
+  }, [question, setTitle, setBody, setTagsInput, setImages]);
 
-  const editImages = question?.images?.map(
-    (image) => `data:${image.contentType};base64,${image.bytes}`
-  );
-
-  const createQuestion = async () => {
-    const question = { title, body, imagePaths: [], tags };
-
-    const res = await uploadImage(images, "questions/upload-image");
-    question.imagePaths = res;
-    const result = await create(question);
-
+  const createOrUpdate = async () => {
+    const existingImages = images.filter(image => !image.isNew).map(image => image.filePath); // Assuming the existing images have a filePath
+    const newImages = images.filter(image => image.isNew).map(image => image.file);
+  
+    let imagePaths = [...existingImages];
+  
+    if (newImages.length > 0) {
+      const uploadedImages = await uploadImage(newImages, "questions/upload-image");
+      imagePaths = [...imagePaths, ...uploadedImages];
+    }
+  
+    const questionData = { title, body, tags, imagePaths };
+  
+    let result;
+    if (id) {
+      await update(`questions/${id}`, questionData);
+      result = question;
+    } else {
+      result = await create(questionData);
+    }
+  
     navigate(`/questions/${result.id}`);
   };
-
   return (
     <>
-      <h1>Ask a public question</h1>
+      <h1>Savol</h1>
       <hr />
       <TitleInput title={title} setTitle={setTitle} titleRef={titleRef} />
       <ImageInput images={images} setImages={setImages} />
@@ -68,7 +91,7 @@ function CreateAndUpdateQuestionPage() {
       <TagsInput
         tagsInput={tagsInput}
         setTagsInput={setTagsInput}
-        createQuestion={createQuestion}
+        submitAction={createOrUpdate}
         handleGetTags={handleGetTags}
       />
       <> {loading && <Spinner />}</>
