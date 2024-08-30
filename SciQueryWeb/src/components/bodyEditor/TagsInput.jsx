@@ -6,7 +6,6 @@ const TagsInput = ({ tagsInput, submitAction, setTagsInput,handleGetTags }) => {
       setTagsInput(value);
     handleGetTags(value);
   };
-
   return (
     <div className="card mb-5">
       <div className="card-body">
@@ -20,7 +19,7 @@ const TagsInput = ({ tagsInput, submitAction, setTagsInput,handleGetTags }) => {
         />
         <button
           onClick={submitAction}
-          disabled={tagsInput.trim() === ""}
+          disabled={(tagsInput + "").trim() === ""}
           className="btn btn-primary"
         >
           Jo'natish

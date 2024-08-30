@@ -21,6 +21,7 @@ const useQuestionForm = () => {
     title,
     setTitle,
     body,
+    setTags,
     setBody,
     images,
     setImages,

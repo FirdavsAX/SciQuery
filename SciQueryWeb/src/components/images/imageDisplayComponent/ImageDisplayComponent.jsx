@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import "./ImageDisplayComponent.css"; // Optional for styling
 
-const ImageDisplayComponent = ({ image, onClick }) => {
+const ImageDisplayComponent = ({ index,image, onClick,onDelete }) => {
   return (
     <div className="image-container">
       <img
@@ -10,6 +10,12 @@ const ImageDisplayComponent = ({ image, onClick }) => {
         onClick={() => onClick(image)}
         className="image"
       />
+      <button
+        className="btn-delete"
+        onClick={() => onDelete(index)}
+      >
+        X
+      </button>
     </div>
   );
 };

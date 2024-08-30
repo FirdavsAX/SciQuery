@@ -5,7 +5,7 @@ import ImageModal from "../../images/ImageModal";
 import ImageComponent from "../../images/imageComponent/ImageComponent";
 import ImageContainer from "../../images/imageContainer/ImageContainer";
 
-const ImageInput = ({ images, setImages }) => {
+const ImageInput = ({ images, setImages,oldImages }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageUpload = (e) => {

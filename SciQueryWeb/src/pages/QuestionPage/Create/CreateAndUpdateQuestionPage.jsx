@@ -30,6 +30,7 @@ function CreateAndUpdateQuestionPage() {
     setTagsInput,
     titleRef,
     editorRef,
+    setTags,
     handleScroll,
     handleGetTags,
   } = useQuestionForm();
@@ -43,16 +44,21 @@ function CreateAndUpdateQuestionPage() {
       setTitle(question.title || "");
       setBody(question.body || "");
       setTagsInput(question.tags.join(' ') || []);
-      
       const formattedImages = question.images?.map(
         (image) => `data:${image.contentType};base64,${image.bytes}`
       ) || [];
       setImages(formattedImages);
     }
   }, [question, setTitle, setBody, setTagsInput, setImages]);
-
+  
   const createOrUpdate = async () => {
-    const existingImages = images.filter(image => !image.isNew).map(image => image.filePath); // Assuming the existing images have a filePath
+    // Assuming the existing images have a filePath
+    const existingImages = question &&
+      question.images &&
+      question.images.length > 0 ?
+      question.images.map(x => x.fileName) : [];
+
+
     const newImages = images.filter(image => image.isNew).map(image => image.file);
   
     let imagePaths = [...existingImages];
@@ -61,9 +67,13 @@ function CreateAndUpdateQuestionPage() {
       const uploadedImages = await uploadImage(newImages, "questions/upload-image");
       imagePaths = [...imagePaths, ...uploadedImages];
     }
-  
+    // Ensure tags are populated if the user doesn't change them
     const questionData = { title, body, tags, imagePaths };
-  
+    if (!tags || tags.length < 1) {
+      // Use the original tags from the question if tags are empty or null
+      tags.push(question.tags || []);
+    }    
+
     let result;
     if (id) {
       await update(`questions/${id}`, questionData);
