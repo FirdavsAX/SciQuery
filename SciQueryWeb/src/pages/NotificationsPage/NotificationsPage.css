@@ -1,0 +1,86 @@
+.notifications-page {
+  padding: 20px;
+}
+
+.notifications-list {
+  margin-bottom: 20px;
+}
+
+.notification-item {
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
+}
+
+.notification-item:hover {
+  background-color: #e0e0e0;
+}
+
+.notification-content {
+  display: flex;
+  flex: 1;
+}
+
+.notification-message {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #888;
+}
+
+.unread .notification-message {
+  font-weight: bold;
+  color: #333;
+}
+
+.read .notification-message {
+  color: #555;
+}
+
+.notification-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-item.unread {
+  border-left: 4px solid #007bff;
+}
+
+.notification-item.read {
+  border-left: 4px solid #6c757d;
+}
+.unread .notification-message {
+  font-weight: bold;
+  color: #333;
+}
+
+.read .notification-message {
+  color: #555;
+}
+.filter-controls {
+  margin-bottom: 20px;
+}
+
+.filter-controls button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border: 1px solid #007bff;
+  background-color: #fff;
+  color: #007bff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-controls button:hover {
+  background-color: #007bff;
+  color: #fff;
+}

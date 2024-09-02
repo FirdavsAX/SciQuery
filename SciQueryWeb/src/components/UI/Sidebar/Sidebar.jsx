@@ -9,22 +9,29 @@ const Sidebar = () => {
       <div className="sidebar">
         <ul className="menu-hover-fill flex flex-col items-start leading-none text-2xl uppercase space-y-4">
           <li>
-          <NavLink to="/" data-text="Asosiy">Asosiy</NavLink>
-
+            <NavLink to="/" data-text="Asosiy">
+              Asosiy
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/questions" data-text="Savollar">Savollar</NavLink>
+            <NavLink to="/notifications/" data-text="Bildirishnomalar">
+              Bildirishnomalar
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/profile/" data-text="Shaxsiy">Shaxsiy</NavLink>
+            <NavLink to="/questions" data-text="Savollar">
+              Savollar
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/Posts/" data-text="Postlarim">Postlarim</NavLink>
+            <NavLink to="/Posts/" data-text="Postlarim">
+              Postlarim
+            </NavLink>
           </li>
           <li>
-            <a href="#" data-text="Categories">
-              Categories
-            </a>
+            <NavLink to="/profile/" data-text="Shaxsiy">
+              Shaxsiy
+            </NavLink>
           </li>
         </ul>
       </div>

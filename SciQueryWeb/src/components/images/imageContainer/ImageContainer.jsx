@@ -5,7 +5,7 @@ import ImageComponent from "../../images/imageComponent/ImageComponent";
 import ImageDisplayComponent from "../imageDisplayComponent/ImageDisplayComponent";
 import "./ImageContainer.css"; // Assuming you have styles for the container
 
-const ImageContainer = ({ images, onDeleteImage }) => {
+const ImageContainer = ({ images, onDeleteImage}) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageClick = (img) => {
@@ -17,17 +17,21 @@ const ImageContainer = ({ images, onDeleteImage }) => {
   };
 
   // Determine if all items in images are strings
-  const allImagesAreStrings = images.every((img) => typeof img === "string");
+  const handleCheckImage= (img) =>{
+    return typeof img === "string";
+  } 
 
   return (
     <div className="image-container d-flex flex-column align-items-center">
       <div className="d-flex flex-wrap gap-5">
         {images &&
           images.map((img, index) =>
-            allImagesAreStrings ? (
+            handleCheckImage(img) ? (
               <ImageDisplayComponent
                 key={index}
+                index={index}
                 image={img}
+                onDelete={() => onDeleteImage(index)}
                 onClick={() => handleImageClick(img)}
                 alt={`Image ${index}`}
                 className="img-fluid"
@@ -42,6 +46,7 @@ const ImageContainer = ({ images, onDeleteImage }) => {
               />
             )
           )}
+
       </div>
       <ImageModal image={selectedImage} onClose={closeModal} />
     </div>

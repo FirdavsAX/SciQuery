@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { putData } from "../../services/ApiService";
 
-export const useUpdate = (url) => {
+export const useUpdate = () => {
   const [loading, setLoading] = useState(false);
   
 
-  const update = async (data) => {
+  const update = async (url,data) => {
     setLoading(true);
     try {
       const result = await putData(url, data);

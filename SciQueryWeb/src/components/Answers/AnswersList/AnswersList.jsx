@@ -7,7 +7,7 @@ import Pagination from "../../Pagination/Pagination";
 
 function AnswersList() {
   const { id } = useParams();
-  const answersUrl = `answers/question/${id}`;
+  const answersUrl = `answers?questionId=${id}`;
   const [pageNumber,setPageNumber] = useState(1);
   // Ma'lumotlarni olish
   const { data: paginatedAnswers } = useFetch(answersUrl);

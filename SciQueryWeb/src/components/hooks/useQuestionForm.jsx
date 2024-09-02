@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { useFetch } from "./useFetch";
 
 const useQuestionForm = () => {
   const titleRef = useRef(null);
   const editorRef = useRef(null);
-
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState([]);
@@ -13,15 +14,14 @@ const useQuestionForm = () => {
     titleRef.current.scrollIntoView({ behavior: "smooth" });
   };
   const handleGetTags = (e) => {
-    setTagsInput(e);
-
-    const tagsArray = tagsInput.split(/[ ,.!?]+/).filter(Boolean);
+    const tagsArray = e.split(" ");
     setTags(tagsArray);
   };
   return {
     title,
     setTitle,
     body,
+    setTags,
     setBody,
     images,
     setImages,

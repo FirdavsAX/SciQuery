@@ -1,10 +1,11 @@
-import React, { Suspense, lazy } from "react";
-import HtmlParser from "html-react-parser";
-import { useFetch } from "../../hooks/useFetch";
-import { useParams } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Spinner from "../../Spinner/Spinner";
 import "./QuestionDetail.css";
+import HtmlParser from "html-react-parser";
+import Spinner from "../../Spinner/Spinner";
+import React, { Suspense, lazy } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useFetch } from "../../hooks/useFetch";
+import EditButton from "../../EditButton/EditButton";
+import { useParams, useNavigate } from "react-router-dom";
 import CommentSection from "../../comments/CommentSection/CommentSection";
 
 // Lazy load components
@@ -14,13 +15,11 @@ const ImageContainer = lazy(() =>
 const RatingComponent = lazy(() =>
   import("../../ratingComponent/RatingComponent")
 );
-const CommentList = lazy(() =>
-  import("../../comments/commentDisplay/CommentsList/CommentsList")
-);
 const UserDetail = lazy(() => import("../../User/UserMini/UserDetail"));
 
 function QuestionDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const url = `questions/${id}`;
   const {
     data: fullQuestion,
@@ -31,6 +30,10 @@ function QuestionDetail() {
   const images = fullQuestion?.images?.map(
     (image) => `data:${image.contentType};base64,${image.bytes}`
   );
+
+  const handleUpdateClick = () => {
+    navigate(`/questions/edit/${id}/`);
+  };
 
   return (
     <div className="question-container mt-4">
@@ -64,7 +67,7 @@ function QuestionDetail() {
                 <ImageContainer images={images} />
               </Suspense>
             ) : (
-              <p>No images available</p>
+              <p className="no-images-text">Rasm mavjud emas</p>
             )}
           </div>
           <div className="mb-4">
@@ -77,12 +80,17 @@ function QuestionDetail() {
             </Suspense>
           </div>
           <div className="mb-4">
-            { (
-              <Suspense fallback={<Spinner />}>
-                <CommentSection questionId={fullQuestion.id} />
-              </Suspense>
-            )}
+            <Suspense fallback={<Spinner />}>
+              <CommentSection questionId={fullQuestion.id} />
+            </Suspense>
           </div>
+
+          {fullQuestion && (
+            <EditButton
+              postUserId={fullQuestion.user?.id}
+              onClick={handleUpdateClick}
+            />
+          )}
         </div>
       )}
     </div>

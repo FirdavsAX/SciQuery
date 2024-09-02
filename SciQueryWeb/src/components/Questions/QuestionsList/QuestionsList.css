@@ -1,1 +1,27 @@
 
+.selected-tags {
+    margin: 10px 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .tag {
+    background-color: #ffffff;
+    padding: 15px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .remove-tag-button {
+    background: none;
+    border: none;
+    color: red;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  
+  .remove-tag-button:hover {
+    font-weight: bold;
+  }
+  

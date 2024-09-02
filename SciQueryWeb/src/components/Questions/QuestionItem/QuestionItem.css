@@ -15,7 +15,7 @@
 
 .question-content {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp :  3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -55,6 +55,7 @@
   margin: 0 10px 10px 0;
   background-color: #ecf0f1;
   color: #34495e;
+  cursor: pointer;
   border-radius: 12px;
   padding: 4px 8px;
   font-size: 14px;

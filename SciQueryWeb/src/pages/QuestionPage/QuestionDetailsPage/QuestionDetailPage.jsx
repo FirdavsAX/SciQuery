@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
-import { useParams, Outlet } from "react-router-dom";
+import { useParams, Outlet, useLocation } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import SpinnerMini from "../../../components/Spinner/SpinnerMini/SpinnerMini";
 import "./QuestionDetailPage.css";
@@ -21,7 +21,7 @@ function QuestionDetailPage() {
   useEffect(() => {
     // Ensure the outlet is shown as soon as QuestionDetail is loaded
     setShowOutlet(true);
-    setTimeout(() => setShowRelatedQuestions(true), 1000); // Delay to show RelatedQuestions
+    setTimeout(() => setShowRelatedQuestions(true), 1200); // Delay to show RelatedQuestions
   }, [id]);
 
   return (

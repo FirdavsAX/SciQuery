@@ -56,13 +56,14 @@ function Navbar({ handleSearch }) {
             </symbol>
           </svg>
         </div>
-        <div className="d-flex justify-content-between align-items-center gap-5">
+        <div className="d-flex justify-content-between align-items-center gap-4 m-2">
           <div>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </div>
           <NotificationComponent />
+          <div></div>
         </div>
       </nav>
     </header>
