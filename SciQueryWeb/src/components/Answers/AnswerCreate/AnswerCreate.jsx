@@ -12,10 +12,10 @@ function CreateAnswer({questionId}) {
 
   const createAnswer = async () => {
     const answer = { body, imagePaths: [], questionId : questionId,userId : '0'};
+    console.log(images);
 
-    const res = await uploadImage(images, "answers/upload-image");
+    const res = await uploadImage(images.map(x => x.file), "answers/upload-image");
     answer.imagePaths = res;
-    console.log(res);
 
     const result = await create(answer);
     window.location.reload();

@@ -40,7 +40,8 @@ const NotificationsPage = () => {
   return (
     <div className="notifications-page">
       <h2>Notifications</h2>
-
+    <hr />
+    <br />
       <div className="filter-controls">
         <button onClick={() => handleFilterChange("all")}>All</button>
         <button onClick={() => handleFilterChange("unread")}>Unread</button>
@@ -58,7 +59,7 @@ const NotificationsPage = () => {
               >
                 <div className="notification-content">
                   <NavLink
-                    to={`/notification/${notification.id}`}
+                    to={`/questions/${notification.questionId}`}
                     onClick={() =>
                       !notification.isRead && markAsRead(notification)
                     }

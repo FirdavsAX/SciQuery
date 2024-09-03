@@ -34,9 +34,7 @@ const RatingComponent = ({ postId, postType, initialVotes }) => {
       >
         <FaArrowDown />
       </button>
-      <button className="icon-button delete-button" aria-label="Delete">
-        <GoRepo />
-      </button>
+
     </div>
   );
 };

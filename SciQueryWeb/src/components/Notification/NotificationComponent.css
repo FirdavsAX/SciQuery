@@ -32,7 +32,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  width: 320px;
+  width: 480px;
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -72,6 +72,10 @@
   transition: background-color 0.3s;
   display: flex;
   align-items: center;
+}
+.notification-dropdown li a{
+  text-decoration: none;
+  background-color: white;
 }
 
 .notification-dropdown li:last-child {

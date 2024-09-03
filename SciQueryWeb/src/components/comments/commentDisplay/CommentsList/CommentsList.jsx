@@ -10,7 +10,7 @@ function CommentList({ comments }) {
   return (
     <div className="comments-container p-3">
       <h4>
-        Comments
+        Fikrlar
         <button className="toggle-button" onClick={toggleVisibility}>
           {isVisible ? "Hide Comments" : "Show Comments"}
         </button>

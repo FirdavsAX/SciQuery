@@ -20,7 +20,7 @@ const CommentForm = ({ onSubmit }) => {
         placeholder="Write your comment..."
         required
       />
-      <button type="submit">Post Comment</button>
+      <button type="submit">Yuborish</button>
     </form>
   );
 };
