@@ -1,0 +1,19 @@
+.delete-button {
+    margin-top: 10px; /* Adjust spacing as needed */
+  }
+  
+  .delete-button .btn-danger {
+    background-color: #dc3545; /* Bootstrap danger color */
+    border: none; /* Remove default border */
+    color: #fff; /* White text */
+  }
+  
+  .delete-button .btn-danger:hover {
+    background-color: #c82333; /* Darker shade for hover effect */
+    color: #fff; /* Ensure text stays white on hover */
+  }
+  
+  .delete-button .btn-danger:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); /* Custom focus shadow */
+  }
+  

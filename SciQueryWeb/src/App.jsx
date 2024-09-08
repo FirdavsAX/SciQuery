@@ -3,12 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //pages
 import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
 import RootLayout from "./layout/RootLayout";
 import QuestionPage from "./pages/QuestionPage/QuestionPage";
-import ContactLayout from "./layout/ContactLayout";
-import Faq from "./pages/help/Faq";
-import Form from "./pages/help/Form";
 import QuestionsList from "./components/Questions/QuestionsList/QuestionsList";
 import ErrorPage from "./pages/help/ErrorPage";
 import CreateAndUpdateQuestionPage from "./pages/QuestionPage/Create/CreateAndUpdateQuestionPage";
@@ -26,6 +22,7 @@ import MyQuestions from "./pages/Posts/MyQuestions/MyQuestions";
 import MyAnswers from "./pages/Posts/MyAnswers/MyAnswers";
 import MyComments from "./pages/Posts/MyComments/MyComments";
 import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
+import UpdatePage from "./pages/QuestionPage/Update/UpdatePage";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -36,14 +33,13 @@ function App() {
       element: token ? <RootLayout /> : <Login setToken={setToken} />,
       children: [
         { index: true, element: <Home /> },
-        { path: "about", element: <About /> },
         {
           path: "questions",
           element: <QuestionPage />,
           children: [
             { index: true, element: <QuestionsList /> },
             { path: "new", element: <CreateAndUpdateQuestionPage /> },
-            { path: "edit/:id", element: <CreateAndUpdateQuestionPage /> },
+            { path: "edit/:id", element: <UpdatePage /> },
           ],
         },
         {
@@ -53,7 +49,7 @@ function App() {
               <QuestionDetailPage />
             </Suspense>
           ),
-          children: [{ index: true, element: <AnswersList /> }],
+          children: [],
         },
         {
           path: "profile",
@@ -84,14 +80,6 @@ function App() {
         {
           path: "notifications/",
           element: <NotificationsPage />,
-        },
-        {
-          path: "contact/",
-          element: <ContactLayout />,
-          children: [
-            { path: "faq", element: <Faq /> },
-            { path: "form", element: <Form /> },
-          ],
         },
       ],
     },

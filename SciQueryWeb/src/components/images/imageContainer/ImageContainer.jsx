@@ -18,7 +18,7 @@ const ImageContainer = ({ images, onDeleteImage}) => {
 
   // Determine if all items in images are strings
   const handleCheckImage= (img) =>{
-    return typeof img === "string";
+    return !img.isNew;
   } 
 
   return (

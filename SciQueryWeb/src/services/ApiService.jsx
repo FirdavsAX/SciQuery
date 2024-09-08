@@ -56,3 +56,22 @@ export const putData = async (url, data) => {
     throw error;
   }
 };
+export const deleteData = async (url) => {
+  url = API_BASE_URL + url;
+  try {
+    const response = await axios.delete(url, {
+      headers: {
+        Authorization: window.localStorage.getItem("token")
+          ? `Bearer ${window.localStorage.getItem("token")}`
+          : "",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    if (error.status === 401) {
+      window.localStorage.removeItem("token");
+    }
+
+    throw error;
+  }
+};

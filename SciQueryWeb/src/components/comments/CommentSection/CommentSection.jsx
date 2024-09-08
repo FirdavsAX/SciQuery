@@ -32,12 +32,11 @@ const CommentSection = ({ questionId, answerId }) => {
     setRefresh(prev => !prev); // Toggle refresh to re-fetch comments
   }, [create, postType, postId]);
 
-  if (loading) return <p>Loading comments...</p>;
-  if (error) return <p>Error loading comments: {error}</p>;
+  if (loading) return <p>Fikrlar yuklanmoqda...</p>;
+  if (error) return <p>Fikrlarni yuklashda xatolik: {error}</p>;
 
   return (
-    <div className="comment-section">
-      <h3>Comments</h3>
+    <div className="">
       <CommentList comments={comments} />
       <CommentForm onSubmit={handleAddComment} />
     </div>

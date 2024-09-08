@@ -1,12 +1,14 @@
 import "./QuestionDetail.css";
 import HtmlParser from "html-react-parser";
 import Spinner from "../../Spinner/Spinner";
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useFetch } from "../../hooks/useFetch";
 import EditButton from "../../EditButton/EditButton";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentSection from "../../comments/CommentSection/CommentSection";
+import DeleteButton from "../../DeleteButton/DeleteButton";
+import { useDelete } from "../../hooks/useDelete";
 
 // Lazy load components
 const ImageContainer = lazy(() =>
@@ -17,7 +19,7 @@ const RatingComponent = lazy(() =>
 );
 const UserDetail = lazy(() => import("../../User/UserMini/UserDetail"));
 
-function QuestionDetail() {
+function QuestionDetail({setIsOwner,userId}) {
   const { id } = useParams();
   const navigate = useNavigate();
   const url = `questions/${id}`;
@@ -26,13 +28,25 @@ function QuestionDetail() {
     isPending: questionPending,
     error: questionError,
   } = useFetch(url);
+  const { deleteItem } = useDelete();
 
   const images = fullQuestion?.images?.map(
     (image) => `data:${image.contentType};base64,${image.bytes}`
   );
-
+  useEffect(() => {
+    if(fullQuestion && fullQuestion.userId === userId){
+      setIsOwner(true);
+    }
+    else{
+      setIsOwner(false);
+    }
+  },[fullQuestion])
   const handleUpdateClick = () => {
     navigate(`/questions/edit/${id}/`);
+  };
+  const handleDeleteClick = async () => {
+    await deleteItem(url);
+    navigate(`/questions/`);
   };
 
   return (
@@ -86,10 +100,16 @@ function QuestionDetail() {
           </div>
 
           {fullQuestion && (
-            <EditButton
-              postUserId={fullQuestion.user?.id}
-              onClick={handleUpdateClick}
-            />
+            <div className="d-flex justify-content-end align-items-center gap-4">
+              <EditButton
+                postUserId={fullQuestion.user?.id}
+                onClick={handleUpdateClick}
+              />
+              <DeleteButton
+                postUserId={fullQuestion.user?.id}
+                onClick={handleDeleteClick}
+              />
+            </div>
           )}
         </div>
       )}
