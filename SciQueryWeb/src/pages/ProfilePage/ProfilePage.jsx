@@ -50,12 +50,12 @@ const ProfilePage = () => {
           image: { ...user.image },
         };
       }
-
+      console.log(updatedUser);
       if (newUserName && newUserName !== user.userName) {
         updatedUser = { ...updatedUser, userName: newUserName };
       }
 
-      await update(updatedUser);
+      await update("users/" + updatedUser.id,updatedUser);
       setUploading(false);
       setImageFile(null);
       setIsEditing(false);
@@ -94,26 +94,7 @@ const ProfilePage = () => {
             <p className="profile-reputation">
               Reputation: {user?.reputation || "N/A"}
             </p>
-            <div className="profile-stats">
-              <div className="stat-item">
-                <span
-                  className="stat-value"
-                  onClick={() => setShowPosts(!showPosts)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {user?.postsCount || 0}
-                </span>
-                <span className="stat-label">Posts</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-value">{user?.followersCount || 0}</span>
-                <span className="stat-label">Followers</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-value">{user?.followingCount || 0}</span>
-                <span className="stat-label">Following</span>
-              </div>
-            </div>
+            
           </div>
         </div>
         {isEditing && (
